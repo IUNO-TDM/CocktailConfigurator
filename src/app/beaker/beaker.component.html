@@ -1,0 +1,16 @@
+<div style="width: 500px; height: 300px; background-color: #444; border: 1px solid #000;">
+  <div fxLayout="column" fxFill fxLayoutGap="5px">
+    <div *ngFor="let layer of cocktail.layers" fxLayout fxFlex fxLayoutGap="5px" class="layer">
+      <div *ngFor="let component of layer.components" fxFlex="100">
+        <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(component)">
+          +
+        </div>
+        <div *ngIf="!isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)"
+          (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.component.color">
+          {{ component.component.name }}
+          <br>{{ component.amount }} ml
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

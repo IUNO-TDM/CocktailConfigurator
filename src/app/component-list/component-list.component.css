@@ -1,0 +1,15 @@
+.component-list {
+    width: 200px;
+    border: 2px dashed #0000;
+}
+
+.component-list.dnd-drag-over {
+    width: 200px;
+    border: 2px dashed #000;
+}
+
+.component {
+    height: 40px;
+    background: #faa;
+    border: 1px solid #aaa;
+}
