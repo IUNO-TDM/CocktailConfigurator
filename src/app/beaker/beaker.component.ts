@@ -13,6 +13,8 @@ export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
   @Input() capacity: number;
   draggingComponent: CocktailLayerComponent;
+  editingComponent: CocktailLayerComponent = null;
+  editingAmount: number = 0;
 
   constructor(private dragAndDropService: DragAndDropService) {
     dragAndDropService.dragStart.subscribe(draggable => {
@@ -94,7 +96,7 @@ export class BeakerComponent implements OnInit {
   ngOnInit() {
   }
 
-  getEmptySpaceHeight() {
+  getRemainingAmount() {
     // calculate total amount
     var totalAmount = 0;
     this.cocktail.layers.forEach(layer => {
@@ -104,6 +106,11 @@ export class BeakerComponent implements OnInit {
     });
 
     var remainingAmount = this.capacity - totalAmount;
+    return remainingAmount;
+  }
+
+  getEmptySpaceHeight() {
+    var remainingAmount = this.getRemainingAmount();
     var height = 100 * remainingAmount / this.capacity;
     return height;
   }
@@ -146,10 +153,26 @@ export class BeakerComponent implements OnInit {
   }
 
   onDragStart(component: CocktailLayerComponent) {
+    this.editingComponent = null;
     var draggable = new Draggable();
     draggable.object = component;
     draggable.origin = this;
     this.dragAndDropService.onDragStart(draggable);
+  }
+
+  onClick(component: CocktailLayerComponent) {
+    if (this.editingComponent == component) {
+      // this.editingComponent = null;
+    } else {
+      this.editingComponent = component;
+      this.editingAmount = component.amount;
+    }
+    console.log("Clicke!");
+  }
+
+  changeAmount(component: CocktailLayerComponent) {
+    component.amount = this.editingAmount;
+    console.log("Setting amount to "+this.editingAmount);
   }
 
   onDragEnd() {
