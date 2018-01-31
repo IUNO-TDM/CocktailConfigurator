@@ -11,13 +11,14 @@ import { DragAndDropService, Draggable } from '../services/drag-and-drop.service
 })
 export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
+  @Input() capacity: number;
   draggingComponent: CocktailLayerComponent;
 
   constructor(private dragAndDropService: DragAndDropService) {
     dragAndDropService.dragStart.subscribe(draggable => {
       if (draggable.origin !== this) {
         this.draggingComponent = draggable.object;
-        this.addPlaceholders();
+        this.addPlaceholders(this.draggingComponent);
       }
     });
 
@@ -50,13 +51,22 @@ export class BeakerComponent implements OnInit {
     return placeholder;
   }
 
-  private addPlaceholders() {
+  private addPlaceholders(component: CocktailLayerComponent) {
     this.cocktail.layers.forEach(layer => {
-      let placeholderComponent = new CocktailLayerComponent(null, 0);
-      layer.components.push(placeholderComponent);
+      // check if component already used in layer
+      var used = false;
+      layer.components.forEach(c => {
+        if (c.component.id == component.component.id) {
+          used = true;
+        }
+      });
+      if (!used) {
+        let placeholderComponent = new CocktailLayerComponent(null, component.amount);
+        layer.components.push(placeholderComponent);
+      }
     });
     let placeholderLayer = new CocktailLayer();
-    let placeholderComponent = new CocktailLayerComponent(null, 0);
+    let placeholderComponent = new CocktailLayerComponent(null, component.amount);
     placeholderLayer.components.push(placeholderComponent);
     this.cocktail.layers.splice(0, 0, placeholderLayer);
   }
@@ -82,6 +92,42 @@ export class BeakerComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  getEmptySpaceHeight() {
+    // calculate total amount
+    var totalAmount = 0;
+    this.cocktail.layers.forEach(layer => {
+      layer.components.forEach(c => {
+        totalAmount += c.amount;
+      });
+    });
+
+    var remainingAmount = this.capacity - totalAmount;
+    var height = 100 * remainingAmount / this.capacity;
+    return height;
+  }
+
+  getLayerHeight(layer: CocktailLayer) {
+    // calculate layer size
+    var layerSize = 0;
+    layer.components.forEach(component => {
+      layerSize += component.amount;
+    });
+
+    var height = 100 * layerSize / this.capacity;
+    return height;
+  }
+
+  getComponentWidth(layer: CocktailLayer, component: CocktailLayerComponent) {
+    // calculate layer size
+    var layerSize = 0;
+    layer.components.forEach(component => {
+      layerSize += component.amount;
+    });
+
+    var width = 100 * component.amount / layerSize;
+    return width;
   }
 
   onDropComponent(placeholderComponent) {
