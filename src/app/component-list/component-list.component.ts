@@ -24,7 +24,7 @@ export class ComponentListComponent implements OnInit {
   }
 
   onDragStart(component: TdmComponent) {
-    var layerComponent = new CocktailLayerComponent(component, 50);
+    var layerComponent = new CocktailLayerComponent(component, 5);
     var draggable = new Draggable();
     draggable.object = layerComponent;
     draggable.origin = this;

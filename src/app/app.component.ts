@@ -42,7 +42,29 @@ export class AppComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
+  }
+
+  convert() {
+    var lines = [];
+    this.cocktail.layers.forEach(layer => {
+      var components = [];
+      layer.components.forEach(layerComponent => {
+        components.push({
+          "ingredient": layerComponent.component.id,
+          "amount": layerComponent.amount
+        });
+      });
+      lines.push({
+        "components": components,
+        "timing": 2,
+        "sleep": 0
+      });
+    });
+    var program = {
+      "lines": lines
+    };
+    var jsonString = JSON.stringify(program);
+    console.log(jsonString);
   }
 }

@@ -14,7 +14,7 @@ export class BeakerComponent implements OnInit {
   @Input() capacity: number;
   draggingComponent: CocktailLayerComponent;
   editingComponent: CocktailLayerComponent = null;
-  editingAmount: number = 0;
+  editingAmount: string = "";
 
   constructor(private dragAndDropService: DragAndDropService) {
     dragAndDropService.dragStart.subscribe(draggable => {
@@ -165,14 +165,15 @@ export class BeakerComponent implements OnInit {
       // this.editingComponent = null;
     } else {
       this.editingComponent = component;
-      this.editingAmount = component.amount;
+      this.editingAmount = "" + component.amount;
     }
     console.log("Clicke!");
   }
 
   changeAmount(component: CocktailLayerComponent) {
-    component.amount = this.editingAmount;
-    console.log("Setting amount to "+this.editingAmount);
+    var newAmount = parseInt(this.editingAmount);
+    component.amount = newAmount;
+    console.log("Setting amount to "+newAmount);
   }
 
   onDragEnd() {
