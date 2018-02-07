@@ -1,23 +1,18 @@
 <div style="width: 250px; height: 470px; background-color: #444; border: 1px solid #000; margin-left: 23px; margin-top: 22px;">
   <div fxLayout="column" fxFill fxLayoutGap="5px">
-    <div style="background-color: #fff;" [fxFlex]="getEmptySpaceHeight()"></div>
-    <div *ngFor="let layer of cocktail.layers" fxLayout fxLayoutGap="5px" class="layer" [fxFlex]="getLayerHeight(layer)">
-      <div *ngFor="let component of layer.components" [fxFlex]="getComponentWidth(layer, component)">
-        <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(component)">
+    <!-- <div style="background-color: #fff;" [fxFlex]="getEmptySpaceHeight()"></div> -->
+    <div *ngFor="let layer of cocktail.layers; let layerIndex = index;" fxLayout fxLayoutGap="5px" class="layer" [fxFlex]="getLayerHeight(layer)">
+      <div *ngFor="let component of layer.components; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
+        <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(component)"
+          (click)="onPlaceholderClicked(component)">
           +
         </div>
-        <div *ngIf="!isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)"
-          (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.component.color"
-          (click)="onClick(component)">
-          <div *ngIf="component == editingComponent">
-            Min: 10ml, Max: {{getRemainingAmount() + component.amount}}
-            <input type="text" [(ngModel)]="editingAmount" ng-pattern="/^[0-9]{1,7}$/"><input type="button" value="Ok" (click)="changeAmount(component)">
-          </div>
-          <div *ngIf="component != editingComponent">
-
-            {{ component.component.name }}
-            <br>{{ component.amount }} ml
-          </div>
+        <div *ngIf="!editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
+          (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onClick(component)">
+        </div>
+        <div *ngIf="editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
+          (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onRemoveComponent(layerIndex, componentIndex)">
+          -
         </div>
       </div>
     </div>

@@ -1,0 +1,17 @@
+<div>
+  <h2 mat-dialog-title>Zutat hinzufügen</h2>
+  <hr>
+  <mat-dialog-content>
+    <div class="component-list">
+      <div *ngFor="let component of components" fxLayout="column" fxLayoutGap="30px">
+        <button (click)="onComponentSelected(component)" fxLayoutAlign="center center" mat-button [style.backgroundColor]="component.color">{{component.name}}</button>
+      </div>
+    </div>
+    <div>
+
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions fxLayoutAlign="center">
+    <button mat-raised-button (click)="onCancel()">Abbrechen</button>
+  </mat-dialog-actions>
+</div>

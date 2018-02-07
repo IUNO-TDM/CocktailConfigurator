@@ -2,11 +2,9 @@
     <div>
         <app-component-list></app-component-list>
     </div>
-    <!-- <div>
-        <beaker [cocktail]="cocktail" capacity="240"></beaker>
-    </div> -->
     <div class="glass" style="width: 300px; height: 500px;">
-            <beaker [cocktail]="cocktail" capacity="240"></beaker>
-        </div>
-        <input type="button" value="Konvertieren" (click)="convert()">
+        <beaker [cocktail]="cocktail"></beaker>
+    </div>
+    <input type="button" value="Konvertieren" (click)="convert()">
+    <input type="button" value="Hinzufügen" (click)="toggleAddComponent()">
 </div>
