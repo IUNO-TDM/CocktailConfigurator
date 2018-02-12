@@ -42,10 +42,6 @@ export class BeakerComponent implements OnInit {
         let layer = this.cocktail.layers[layerIndex];
         layer.components.splice(componentIndex, 1);
         this.removeUnneededLayers();
-        // if (this.isLayerEmpty(layer)) {
-        //   this.cocktail.layers.splice(layerIndex, 1);
-        // }
-        // this.setEditMode(false);
       }
     });
   }
@@ -161,8 +157,6 @@ export class BeakerComponent implements OnInit {
   }
 
   onDropComponent(placeholderComponent) {
-    console.log("Dropping component:");
-    console.log(this.draggingComponent);
     // replace placeholderComponent by dragged component
     this.cocktail.layers.forEach(layer => {
       for (var index = layer.components.length - 1; index >= 0; index -= 1) {
@@ -173,6 +167,8 @@ export class BeakerComponent implements OnInit {
       }
     });
     this.dragAndDropService.onDrop(this);
+    this.cocktail.layers = this.cocktail.layers.slice();
+    console.log("Hallo!");
   }
 
   onPlaceholderClicked(placeholderComponent) {

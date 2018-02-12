@@ -18,13 +18,15 @@ import { DragAndDropService } from './services/drag-and-drop.service';
 import { ComponentListComponent } from './component-list/component-list.component';
 import { ComponentService } from './services/component.service';
 import { ComponentListDialogComponent } from './component-list-dialog/component-list-dialog.component';
+import { IngredientsListingComponent } from './ingredients-listing/ingredients-listing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BeakerComponent,
     ComponentListComponent,
-    ComponentListDialogComponent
+    ComponentListDialogComponent,
+    IngredientsListingComponent
   ],
   imports: [
     BrowserModule,
