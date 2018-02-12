@@ -37,6 +37,22 @@ export class Cocktail {
         });
         return ingredients;
     }
+
+    public addComponent(component: TdmComponent, layerIndex: number) {
+        this.layers[layerIndex].components.push(component);
+    }
+
+    public removeComponent(layerIndex: number, componentIndex: number) {
+        this.layers[layerIndex].components.splice(componentIndex, 1);
+    }
+
+    public addLayer(layer: CocktailLayer, layerIndex: number) {
+        this.layers.splice(layerIndex, 0, layer);
+    }
+
+    public removeLayer(layerIndex: number) {
+        this.layers.splice(layerIndex, 1);
+    }
 }
 
 export class CocktailLayer {

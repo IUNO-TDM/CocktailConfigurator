@@ -3,6 +3,7 @@ import { Input } from '@angular/core';
 import { Cocktail, CocktailLayer, TdmComponent } from '../model/cocktail';
 import { ComponentService } from '../services/component.service';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'ingredients-listing',
@@ -16,15 +17,11 @@ export class IngredientsListingComponent implements OnInit {
   ingredients = {};
 
   constructor(
-    private componentService: ComponentService    
-  ) { 
-    console.log("---- Cocktail 2");
-    console.log(this.cocktail);
+    private componentService: ComponentService
+  ) {
     componentService.getComponents().subscribe(components => {
       this.components = components;
-      console.log("---- Cocktail 3");
-      console.log(this.cocktail);
-        this.updateIngredients();
+      this.updateIngredients();
     });
   }
 
@@ -33,32 +30,36 @@ export class IngredientsListingComponent implements OnInit {
     return keys;
   }
 
+  getComponentName(componentId) {
+    var componentName = "unknown";
+    this.components.forEach(component => {
+      if (component.id == componentId) {
+        componentName = component.name;
+      }
+    });
+    return componentName;
+  }
+
+  getComponentAmount(componentId) {
+    var totalAmount = this.cocktail.amount;
+    var totalFragments = this.cocktail.getFragmentsCount();
+    var fragments = this.ingredients[componentId];
+    var amount = totalAmount * fragments / totalFragments;
+    return amount;
+  }
+
   private updateIngredients() {
     if (this.cocktail) {
       this.ingredients = this.cocktail.getIngredients();
     }
-    // var ingredients = [];
-    // if (this.cocktail) {
-    //   // total fragments
-    //   var total = 0;
-    //   this.cocktail.layers.forEach(layer => {
-    //     total += layer.components.length;
-    //   })
-      
-    //   this.components.forEach(component => {
-    //     var 
-    //   });
-    // }
   }
 
   ngOnInit() {
-    console.log("---- Cocktail");
-    console.log(this.cocktail);
     this.updateIngredients();
   }
 
-  ngDoCheck() {
-    console.log("Check!");
+  ngDoCheck() { //TODO: think about a better solution (service, emitter, behavioursubject, ...)
+    this.updateIngredients();
   }
 
 }

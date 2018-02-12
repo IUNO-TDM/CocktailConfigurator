@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
     return this.editMode == EditMode.None;
   }
 
-  toggleAddComponent() {
+  toggleEditCocktail() {
     if (this.editMode == EditMode.AddComponent) {
       this.editMode = EditMode.None;
       this.beaker.setEditMode(false);

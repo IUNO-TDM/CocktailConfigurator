@@ -15,10 +15,11 @@ export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
   draggingComponent: TdmComponent;
   draggingIndex = {};
-  placeholdersAdded = false;
+  layerPlaceholdersVisible = false;
   editMode = false;
   maxComponentsPerLayer = 8;
   maxLayers = 8;
+  layersToDisplay: CocktailLayer[] = [];
 
   constructor(
     private dragAndDropService: DragAndDropService,
@@ -27,12 +28,12 @@ export class BeakerComponent implements OnInit {
     dragAndDropService.dragStart.subscribe(draggable => {
       if (draggable.origin !== this) {
         this.draggingComponent = draggable.object;
-        this.addPlaceholders();
+        this.setEditMode(true);
       }
     });
 
     dragAndDropService.dragEnd.subscribe(() => {
-      this.removePlaceholders();
+      this.setEditMode(false);
     });
 
     dragAndDropService.drop.subscribe(event => {
@@ -41,7 +42,10 @@ export class BeakerComponent implements OnInit {
         let componentIndex = this.draggingIndex['componentIndex'];
         let layer = this.cocktail.layers[layerIndex];
         layer.components.splice(componentIndex, 1);
-        this.removeUnneededLayers();
+        if (layer.components.length == 0) {
+          this.cocktail.removeLayer(layerIndex);
+        }
+        this.updateLayersToDisplay();
       }
     });
   }
@@ -51,101 +55,71 @@ export class BeakerComponent implements OnInit {
     return placeholder;
   }
 
-  isLayerEmpty(layer: CocktailLayer) {
-    var empty = true;
-    layer.components.forEach(component => {
-      if (component.id != null) { // ignore placeholders
-        empty = false;
-      }
-    });
-    return empty;
-  }
+  private updateLayersToDisplay() {
+    function createPlaceholderComponent() {
+      let placeholderComponent = new TdmComponent(null, null, "#aaa");
+      return placeholderComponent;
+    }
 
-  // removes empty layers with respect to placeholders
-  private removeUnneededLayers() {
-    var emptyLayer = false;
-    for (var i = this.cocktail.layers.length - 1; i >= 0; i -= 1) {
-      var layer = this.cocktail.layers[i];
-      if (this.isLayerEmpty(layer)) {
-        if (emptyLayer) {
-          this.cocktail.layers.splice(i, 1);
-        } else {
-          emptyLayer = true;
-        }
-      } else {
-        emptyLayer = false;
+    function createPlaceholderLayer() {
+      let placeholderLayer = new CocktailLayer();
+      let placeholderComponent = createPlaceholderComponent();
+      placeholderLayer.components.push(placeholderComponent);
+      return placeholderLayer;
+    }
+
+    this.layerPlaceholdersVisible = false;
+    if (this.editMode) {
+      if (this.cocktail.layers.length < this.maxLayers) {
+        this.layerPlaceholdersVisible = true;
       }
     }
+
+    var layersToDisplay: CocktailLayer[] = [];
+    if (this.layerPlaceholdersVisible) {
+      let placeholderLayer = createPlaceholderLayer();
+      layersToDisplay.push(placeholderLayer);
+    }
+
+    this.cocktail.layers.forEach(layer => {
+      var components: TdmComponent[] = []
+      layer.components.forEach(component => {
+        components.push(component);
+      });
+      if (this.editMode && layer.components.length < this.maxComponentsPerLayer) {
+        let placeholderComponent = createPlaceholderComponent();
+        components.push(placeholderComponent);
+      }
+      var displayLayer = new CocktailLayer();
+      displayLayer.components = components;
+      layersToDisplay.push(displayLayer);
+      if (this.layerPlaceholdersVisible) {
+        let placeholderLayer = createPlaceholderLayer();
+        layersToDisplay.push(placeholderLayer);
+      }
+    });
+    this.layersToDisplay = layersToDisplay;
   }
 
   setEditMode(editMode: boolean) {
     this.editMode = editMode;
-    if (editMode) {
-      this.addPlaceholders();
-    } else {
-      this.removePlaceholders();
-    }
-  }
-
-  private addPlaceholders() {
-    if (!this.placeholdersAdded) {
-      this.placeholdersAdded = true;
-      this.cocktail.layers.forEach(layer => {
-        let placeholderComponent = new TdmComponent(null, null, "#aaa");
-        if (layer.components.length < this.maxComponentsPerLayer) {
-          layer.components.push(placeholderComponent);
-        }
-      });
-      var count = this.cocktail.layers.length;
-      if (count < this.maxLayers) {
-        var index = 0;
-        do {
-          let placeholderLayer = new CocktailLayer();
-          let placeholderComponent = new TdmComponent(null, null, "#aaa");
-          placeholderLayer.components.push(placeholderComponent);
-          this.cocktail.layers.splice(index * 2, 0, placeholderLayer);
-          index += 1;
-        } while (index < count);
-      }
-    }
-  }
-
-  private removePlaceholders() {
-    if (this.placeholdersAdded) {
-      this.placeholdersAdded = false;
-      // remove placeholder components
-      this.cocktail.layers.forEach(layer => {
-        for (var index = layer.components.length - 1; index >= 0; index -= 1) {
-          let c = layer.components[index];
-          if (c.id == null) {
-            layer.components.splice(index, 1);
-          }
-        }
-      });
-
-      // remove empty layers
-      for (var index = this.cocktail.layers.length - 1; index >= 0; index -= 1) {
-        let layer = this.cocktail.layers[index];
-        if (layer.components.length == 0) {
-          this.cocktail.layers.splice(index, 1);
-        }
-      }
-    }
+    this.updateLayersToDisplay();
   }
 
   ngOnInit() {
+    this.updateLayersToDisplay();
   }
 
-  getComponentCount() {
+  getDisplayComponentsCount() {
     var count = 0;
-    this.cocktail.layers.forEach(layer => {
+    this.layersToDisplay.forEach(layer => {
       count += layer.components.length;
     });
     return count;
   }
 
-  getLayerHeight(layer: CocktailLayer) {
-    var total = this.getComponentCount();
+  getDisplayLayerHeight(layer: CocktailLayer) {
+    var total = this.getDisplayComponentsCount();
     var layerCount = layer.components.length;
     var height = 100 * layerCount / total;
     return height;
@@ -156,22 +130,19 @@ export class BeakerComponent implements OnInit {
     return width;
   }
 
-  onDropComponent(placeholderComponent) {
-    // replace placeholderComponent by dragged component
-    this.cocktail.layers.forEach(layer => {
-      for (var index = layer.components.length - 1; index >= 0; index -= 1) {
-        let c = layer.components[index];
-        if (c === placeholderComponent) {
-          layer.components.splice(index, 1, this.draggingComponent);
-        }
-      }
-    });
-    this.dragAndDropService.onDrop(this);
-    this.cocktail.layers = this.cocktail.layers.slice();
-    console.log("Hallo!");
+  getCocktailLayerIndex(layerIndex: number) {
+    var index = layerIndex;
+    if (this.layerPlaceholdersVisible) {
+      index = (layerIndex - 1) / 2;
+    }
+    return index;
   }
 
-  onPlaceholderClicked(placeholderComponent) {
+  // ------------------------------------------
+  //  Functions with position indexes
+  // ------------------------------------------
+  onPlaceholderClicked(layerIndex: number, componentIndex: number) {
+    let cocktailLayerIndex = this.getCocktailLayerIndex(layerIndex);
     let dialogRef = this.dialog.open(ComponentListDialogComponent, {
       width: '250px',
       data: {
@@ -180,32 +151,49 @@ export class BeakerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.cocktail.layers.forEach(layer => {
-          for (var index = layer.components.length - 1; index >= 0; index -= 1) {
-            let c = layer.components[index];
-            if (c === placeholderComponent) {
-              layer.components.splice(index, 1, result);
-            }
-          }
-        });
-        this.removePlaceholders();
-        this.addPlaceholders();
+        this.insertComponent(result, layerIndex, componentIndex);
       }
     });
   }
 
+  insertComponent(component: TdmComponent, layerIndex: number, componentIndex: number) {
+    if (this.layerPlaceholdersVisible) {
+      if (layerIndex % 2 == 0) {
+        var newLayer = new CocktailLayer();
+        newLayer.components.push(component);
+        this.cocktail.layers.splice(layerIndex / 2, 0, newLayer);
+      } else {
+        // subtract first placeholder layer, then each second layer is a placeholder
+        let cocktailLayerIndex = (layerIndex - 1) / 2;
+        this.cocktail.layers[cocktailLayerIndex].components.push(component);
+      }
+    } else {
+      this.cocktail.layers[layerIndex].components.push(component);
+    }
+    this.updateLayersToDisplay();
+  }
+
   onDragStart(layerIndex: number, componentIndex: number) {
-    var component = this.cocktail.layers[layerIndex].components[componentIndex];
-    this.draggingIndex = { layerIndex: layerIndex, componentIndex: componentIndex };
+    let cocktailLayerIndex = this.getCocktailLayerIndex(layerIndex);
+    var component = this.cocktail.layers[cocktailLayerIndex].components[componentIndex];
+    this.draggingIndex = { layerIndex: cocktailLayerIndex, componentIndex: componentIndex };
     var draggable = new Draggable();
     draggable.object = component;
     draggable.origin = this;
     this.dragAndDropService.onDragStart(draggable);
   }
 
+  onDropComponent(layerIndex: number, componentIndex: number) {
+    this.insertComponent(this.draggingComponent, layerIndex, componentIndex);
+  }
+
   onRemoveComponent(layerIndex: number, componentIndex: number) {
-    this.cocktail.layers[layerIndex].components.splice(componentIndex, 1);
-    this.removeUnneededLayers();
+    let cocktailLayerIndex = this.getCocktailLayerIndex(layerIndex);
+    this.cocktail.layers[cocktailLayerIndex].components.splice(componentIndex, 1);
+    if (this.cocktail.layers[cocktailLayerIndex].components.length == 0) {
+      this.cocktail.removeLayer(cocktailLayerIndex);
+    }
+    this.updateLayersToDisplay();
   }
 
   onClick(component: TdmComponent) {

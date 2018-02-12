@@ -7,5 +7,6 @@
     </div>
     <ingredients-listing [cocktail]="cocktail"></ingredients-listing>
     <input type="button" value="Konvertieren" (click)="convert()">
-    <input type="button" value="Hinzufügen" (click)="toggleAddComponent()">    
+    <input *ngIf="!editMode" type="button" value="Bearbeiten" (click)="toggleEditCocktail()">    
+    <input *ngIf="editMode" type="button" value="Fertig" (click)="toggleEditCocktail()">    
 </div>

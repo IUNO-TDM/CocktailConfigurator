@@ -1,8 +1,6 @@
-  ingredients-listing works!
-  <div *ngFor="let componentId of getComponentIds()">
-    {{componentId}}
-  </div>
-  <div *ngFor="let layer of cocktail.layers">
-      {{layer}}
-    </div>
-  
+<table>
+  <tr *ngFor="let componentId of getComponentIds()">
+      <td>{{getComponentName(componentId)}}</td>
+      <td style="text-align: right;">{{getComponentAmount(componentId) | number:'.2-2'}} ml</td>
+    </tr>
+</table>
