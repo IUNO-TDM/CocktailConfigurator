@@ -1,7 +1,12 @@
-.layer {
-    background-color: #559;
+.empty {
+    border: 5px dashed #888;
+    background-color: #aaa;
 }
 
+/* .layer {
+    background-color: #559;
+}
+ */
 .component {
     background-color: #5a5;
     text-align: center;
@@ -17,4 +22,25 @@
 
 .placeholder.dnd-drag-over {
     background-color: #888;
+}
+
+.glass {
+    /* outline: 2px dashed black; */
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    background-image: url(../../assets/beaker.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.glass-clip {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    clip-path: polygon(3% 3%, 97% 3%, 91% 98%, 9% 98%, 3% 3%);
 }

@@ -90,15 +90,20 @@ export class BeakerComponent implements OnInit {
         let placeholderComponent = createPlaceholderComponent();
         components.push(placeholderComponent);
       }
-      var displayLayer = new CocktailLayer();
-      displayLayer.components = components;
-      layersToDisplay.push(displayLayer);
+      var displayLayer = new CocktailLayer()
+      displayLayer.components = components
+      layersToDisplay.push(displayLayer)
       if (this.layerPlaceholdersVisible) {
         let placeholderLayer = createPlaceholderLayer();
         layersToDisplay.push(placeholderLayer);
       }
     });
     this.layersToDisplay = layersToDisplay;
+  }
+
+  isEmpty() {
+    let empty = this.cocktail.layers.length == 0
+    return empty
   }
 
   setEditMode(editMode: boolean) {
