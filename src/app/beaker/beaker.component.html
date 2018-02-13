@@ -1,45 +1,45 @@
 <div class="glass" style="width: 300px; height: 500px;">
-    <svg height="0" fxFlex="0">
-        <clipPath id="clipping-path-2" clipPathUnits="objectBoundingBox">
-          <path d="
-        M0.045,0.11
-        C0.5,0.14
-        0.5,0.10
-        0.955,0.11
-        L0.925,0.96
-        L0.075,0.96
-        L0.045,0.1Z
-        "/>
-        </clipPath>
-      </svg>
-      <div class="glass-clip" style="width: 300px; height: 500px;" fxLayout="column">
-        <div fxFlex="10">
-          </div>
-          <div fxFlex="90">
-            <!-- {{ editMode }} -->
-            <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="placeholder" fxLayoutAlign="center center" dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)"
-            (click)="onPlaceholderClicked(0, 0)">
-                +
-              </div>
-            <div *ngIf="!isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px">
-              <!-- <div style="background-color: #fff;" [fxFlex]="getEmptySpaceHeight()"></div> -->
-              <div *ngFor="let layer of layersToDisplay; let layerIndex = index;" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
-                <!-- <div *ngFor="let layer of cocktail.layers; let layerIndex = index;" fxLayout fxLayoutGap="5px" class="layer" [fxFlex]="getLayerHeight(layer)"> -->
-                <div *ngFor="let component of layer.components; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
-                  <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(layerIndex, componentIndex)"
-                    (click)="onPlaceholderClicked(layerIndex, componentIndex)">
-                    +
-                  </div>
-                  <div *ngIf="!editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
-                    (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onClick(component)">
-                  </div>
-                  <div *ngIf="editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
-                    (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onRemoveComponent(layerIndex, componentIndex)">
-                    -
-                  </div>
-                </div>
-              </div>
+  <svg height="0" fxFlex="0">
+    <clipPath id="clipping-path-2" clipPathUnits="objectBoundingBox">
+      <path d="M0.045,0.11C0.5,0.11,0.5,0.20,0.955,0.11L0.955,0.11L0.925,0.96L0.075,0.96L0.045,0.11z">
+        <animate attributeName="d" dur="7s" repeatCount="indefinite" values="
+          M0.045,0.13C0.5,0.13,0.5,0.11,0.955,0.11L0.955,0.13L0.925,0.96L0.075,0.96L0.045,0.13z;
+          M0.045,0.12C0.5,0.11,0.5,0.11,0.955,0.12L0.955,0.13L0.925,0.96L0.075,0.96L0.045,0.12z;
+          M0.045,0.11C0.5,0.11,0.5,0.13,0.955,0.13L0.955,0.13L0.925,0.96L0.075,0.96L0.045,0.11z;
+          M0.045,0.12C0.5,0.11,0.5,0.11,0.955,0.12L0.955,0.13L0.925,0.96L0.075,0.96L0.045,0.12z;
+          M0.045,0.13C0.5,0.13,0.5,0.11,0.955,0.11L0.955,0.13L0.925,0.96L0.075,0.96L0.045,0.13z;"
+         />
+      </path>
+    </clipPath>
+  </svg>
+  <div class="glass-clip" style="width: 300px; height: 500px;" fxLayout="column">
+    <div fxFlex="10">
+    </div>
+    <div fxFlex="90">
+      <!-- {{ editMode }} -->
+      <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="placeholder" fxLayoutAlign="center center" dnd-droppable
+        fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
+        +
+      </div>
+      <div *ngIf="!isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px">
+        <!-- <div style="background-color: #fff;" [fxFlex]="getEmptySpaceHeight()"></div> -->
+        <div *ngFor="let layer of layersToDisplay; let layerIndex = index;" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
+          <!-- <div *ngFor="let layer of cocktail.layers; let layerIndex = index;" fxLayout fxLayoutGap="5px" class="layer" [fxFlex]="getLayerHeight(layer)"> -->
+          <div *ngFor="let component of layer.components; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
+            <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(layerIndex, componentIndex)"
+              (click)="onPlaceholderClicked(layerIndex, componentIndex)">
+              +
+            </div>
+            <div *ngIf="!editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
+              (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onClick(component)">
+            </div>
+            <div *ngIf="editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
+              (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onRemoveComponent(layerIndex, componentIndex)">
+              -
             </div>
           </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
