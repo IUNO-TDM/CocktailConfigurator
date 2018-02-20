@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ComponentService } from '../services/component.service';
-import { TdmComponent } from '../model/cocktail';
+import { CocktailComponent } from '../model/cocktail';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -9,14 +9,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./component-list-dialog.component.css']
 })
 export class ComponentListDialogComponent implements OnInit {
-  components: TdmComponent[] = [];
+  components: CocktailComponent[] = [];
 
   constructor(
     private componentService: ComponentService,
     public dialogRef: MatDialogRef<ComponentListDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {
-    componentService.getComponents().subscribe(components => {
+    componentService.components.subscribe(components => {
       this.components = components;
     });
   }
@@ -24,7 +24,7 @@ export class ComponentListDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  onComponentSelected(component: TdmComponent) {
+  onComponentSelected(component: CocktailComponent) {
     this.dialogRef.close(component);
   }
 

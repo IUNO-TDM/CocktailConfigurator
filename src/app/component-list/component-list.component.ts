@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DragAndDropService, Draggable } from '../services/drag-and-drop.service';
 import { ComponentService } from '../services/component.service';
-import { TdmComponent } from '../model/cocktail';
+import { CocktailComponent } from '../model/cocktail';
 
 @Component({
   selector: 'app-component-list',
@@ -9,13 +9,13 @@ import { TdmComponent } from '../model/cocktail';
   styleUrls: ['./component-list.component.css']
 })
 export class ComponentListComponent implements OnInit {
-  components : TdmComponent[] = [];
+  components : CocktailComponent[] = [];
 
   constructor(
     private dragAndDropService: DragAndDropService,
     private componentService: ComponentService
   ) {
-    componentService.getComponents().subscribe(components => {
+    componentService.components.subscribe(components => {
       this.components = components;
     });
   }
@@ -23,7 +23,7 @@ export class ComponentListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDragStart(component: TdmComponent) {
+  onDragStart(component: CocktailComponent) {
     // var layerComponent = new CocktailLayerComponent(component, 25);
     var draggable = new Draggable();
     draggable.object = component;

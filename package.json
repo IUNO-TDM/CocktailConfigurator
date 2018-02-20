@@ -2,15 +2,22 @@
   "name": "cocktail-configurator",
   "version": "0.0.0",
   "license": "MIT",
+  "private": false,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
+    "packagr": "ng-packagr -p package.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "ngPackage": {
+    "lib": {
+      "entryFile": "./src/public_api.ts"
+    },
+    "dest": "dist/cocktail-configurator"
+  },
   "dependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/cdk": "^5.2.0",
@@ -46,6 +53,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "ng-packagr": "^2.0.0",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Cocktail, CocktailLayer, TdmComponent } from '../model/cocktail';
+import { Cocktail, CocktailLayer, CocktailComponent } from '../model/cocktail';
 import { ComponentService } from '../services/component.service';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
@@ -13,13 +13,13 @@ import { DecimalPipe } from '@angular/common';
 export class IngredientsListingComponent implements OnInit {
   @Input() cocktail: Cocktail;
 
-  components: TdmComponent[] = [];
+  components: CocktailComponent[] = [];
   ingredients = {};
 
   constructor(
     private componentService: ComponentService
   ) {
-    componentService.getComponents().subscribe(components => {
+    componentService.components.subscribe(components => {
       this.components = components;
       this.updateIngredients();
     });

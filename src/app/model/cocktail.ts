@@ -1,4 +1,4 @@
-export class TdmComponent {
+export class CocktailComponent {
     id: string;
     name: string;
     color: string;
@@ -38,7 +38,7 @@ export class Cocktail {
         return ingredients;
     }
 
-    public addComponent(component: TdmComponent, layerIndex: number) {
+    public addComponent(component: CocktailComponent, layerIndex: number) {
         this.layers[layerIndex].components.push(component);
     }
 
@@ -56,5 +56,5 @@ export class Cocktail {
 }
 
 export class CocktailLayer {
-    components: TdmComponent[] = [];
+    components: CocktailComponent[] = [];
 }

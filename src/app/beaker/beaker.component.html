@@ -1,4 +1,8 @@
 <div class="glass" style="width: 200px; height: 300px;">
+  <svg style="position: absolute;" width="200px" height="300px" viewBox="0 0 1 1" vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
+    <path d="M0.03,0.03 L0.06,0.97 L0.94,0.97 L0.97,0.03" stroke="black" stroke-width="0.02"
+      fill="none" />
+  </svg>
   <svg height="0" fxFlex="0">
     <clipPath id="clipping-path-2" clipPathUnits="objectBoundingBox">
       <path d="M0.045,0.12C0.5,0.12,0.5,0.11,0.955,0.11 L0.955,0.12L0.925,0.96L0.075,0.96z">
@@ -7,15 +11,14 @@
           M0.045,0.12C0.5,0.11,0.5,0.11,0.955,0.12 L0.955,0.12L0.925,0.96L0.075,0.96z;
           M0.045,0.11C0.5,0.11,0.5,0.12,0.955,0.12 L0.955,0.12L0.925,0.96L0.075,0.96z;
           M0.045,0.12C0.5,0.11,0.5,0.11,0.955,0.12 L0.955,0.12L0.925,0.96L0.075,0.96z;
-          M0.045,0.12C0.5,0.12,0.5,0.11,0.955,0.11 L0.955,0.12L0.925,0.96L0.075,0.96z;"
-         />
-     </path>
+          M0.045,0.12C0.5,0.12,0.5,0.11,0.955,0.11 L0.955,0.12L0.925,0.96L0.075,0.96z;" />
+      </path>
     </clipPath>
   </svg>
   <div class="glass-clip" style="width: 200px; height: 300px;" fxLayout="column">
     <div fxFlex="10">
     </div>
-    <div fxFlex="90" style="padding-bottom: 12px;">
+    <div fxFlex="90" style="padding-bottom: 13px;">
       <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="placeholder" fxLayoutAlign="center center" dnd-droppable
         fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
         +

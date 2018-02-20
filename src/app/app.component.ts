@@ -4,7 +4,7 @@ import { ViewChild } from '@angular/core';
 import { Inject } from '@angular/core';
 
 // custom imports
-import { TdmComponent } from './model/cocktail';
+import { CocktailComponent } from './model/cocktail';
 import { Cocktail } from './model/cocktail';
 import { CocktailLayer } from './model/cocktail';
 import { BeakerComponent } from './beaker/beaker.component';
@@ -25,14 +25,25 @@ export class AppComponent implements OnInit {
   @ViewChild(BeakerComponent) beaker: BeakerComponent;
   title = 'app';
   cocktail: Cocktail;
-  components: TdmComponent[] = [];
+  components: CocktailComponent[] = [];
   editMode: EditMode = EditMode.None;
 
   constructor(
     private componentService: ComponentService,
   ) {
     this.cocktail = new Cocktail();
-    componentService.getComponents().subscribe(components => {
+    componentService.setComponents([
+      new CocktailComponent("1", "Apfelsaft", "#7d7"),
+      new CocktailComponent("2", "Bananensaft", "#dd7"),
+      new CocktailComponent("3", "Kirschsaft", "#d77"),
+      new CocktailComponent("4", "Maracujasaft", "#da7"),
+      new CocktailComponent("5", "Ananassaft", "#dc9"),
+      new CocktailComponent("6", "Reserved 1", "#ddf"),
+      new CocktailComponent("7", "Reserved 2", "#ddf"),
+      new CocktailComponent("8", "Reserved 3", "#ddf"),
+  ]
+  )
+    componentService.components.subscribe(components => {
       this.components = components;
       let layer1 = new CocktailLayer();
       layer1.components.push(this.components[0]);
@@ -56,14 +67,14 @@ export class AppComponent implements OnInit {
       this.cocktail.layers.push(layer3);
       })
     // this.components = [
-    //   new TdmComponent("1", "Apfelsaft", "#7d7"),
-    //   new TdmComponent("2", "Bananensaft", "#dd7"),
-    //   new TdmComponent("3", "Kirschsaft", "#d77"),
-    //   new TdmComponent("4", "Marakujasaft", "#da7"),
-    //   new TdmComponent("5", "Ananassaft", "#dc9"),
-    //   new TdmComponent("6", "Reserved 1", "#ddf"),
-    //   new TdmComponent("7", "Reserved 2", "#ddf"),
-    //   new TdmComponent("8", "Reserved 3", "#ddf"),
+    //   new CocktailComponent("1", "Apfelsaft", "#7d7"),
+    //   new CocktailComponent("2", "Bananensaft", "#dd7"),
+    //   new CocktailComponent("3", "Kirschsaft", "#d77"),
+    //   new CocktailComponent("4", "Marakujasaft", "#da7"),
+    //   new CocktailComponent("5", "Ananassaft", "#dc9"),
+    //   new CocktailComponent("6", "Reserved 1", "#ddf"),
+    //   new CocktailComponent("7", "Reserved 2", "#ddf"),
+    //   new CocktailComponent("8", "Reserved 3", "#ddf"),
     // ];
   }
 

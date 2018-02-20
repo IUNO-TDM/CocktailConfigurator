@@ -16,7 +16,8 @@
 }
 
 .glass {
-    background-image: url(../../assets/beaker.svg);
+    /* background-image: url(../../assets/beaker.svg); */
+    background-image: url(#beaker-svg);
     background-size: 100% 100%;
 }
 

@@ -1,17 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-import { AppComponent } from './app.component';
+import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DndModule } from 'ng2-dnd';
 
 // angular material
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
-
 
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
@@ -22,22 +16,24 @@ import { ComponentListDialogComponent } from './component-list-dialog/component-
 import { IngredientsListingComponent } from './ingredients-listing/ingredients-listing.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BeakerComponent,
-    ComponentListComponent,
-    ComponentListDialogComponent,
-    IngredientsListingComponent
-  ],
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    CommonModule,
     FlexLayoutModule,    
-    FormsModule,
     MatDialogModule,
     MatButtonModule,
     DndModule.forRoot(),
+  ],
+  declarations: [
+    BeakerComponent,
+    ComponentListComponent,
+    ComponentListDialogComponent,
+    IngredientsListingComponent    
+  ],
+  exports: [
+    BeakerComponent,
+    ComponentListComponent,
+    ComponentListDialogComponent,
+    IngredientsListingComponent,
   ],
   providers: [
     DragAndDropService,
@@ -45,7 +41,6 @@ import { IngredientsListingComponent } from './ingredients-listing/ingredients-l
   ],
   entryComponents: [
     ComponentListDialogComponent,
-  ],
-  bootstrap: [AppComponent]
+  ]
 })
-export class AppModule { }
+export class CocktailConfiguratorModule { }

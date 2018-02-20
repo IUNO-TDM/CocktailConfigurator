@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Cocktail, CocktailLayer, TdmComponent } from '../model/cocktail';
+import { Cocktail, CocktailLayer, CocktailComponent } from '../model/cocktail';
 import { DragAndDropService, Draggable } from '../services/drag-and-drop.service';
 import { ComponentListDialogComponent } from '../component-list-dialog/component-list-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -13,7 +13,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
-  draggingComponent: TdmComponent;
+  draggingComponent: CocktailComponent;
   draggingIndex = {};
   layerPlaceholdersVisible = false;
   editMode = false;
@@ -50,14 +50,14 @@ export class BeakerComponent implements OnInit {
     });
   }
 
-  isPlaceholder(component: TdmComponent): boolean {
+  isPlaceholder(component: CocktailComponent): boolean {
     var placeholder = (component.id == null);
     return placeholder;
   }
 
   private updateLayersToDisplay() {
     function createPlaceholderComponent() {
-      let placeholderComponent = new TdmComponent(null, null, "#aaa");
+      let placeholderComponent = new CocktailComponent(null, null, "#aaa");
       return placeholderComponent;
     }
 
@@ -82,7 +82,7 @@ export class BeakerComponent implements OnInit {
     }
 
     this.cocktail.layers.forEach(layer => {
-      var components: TdmComponent[] = []
+      var components: CocktailComponent[] = []
       layer.components.forEach(component => {
         components.push(component);
       });
@@ -130,7 +130,7 @@ export class BeakerComponent implements OnInit {
     return height;
   }
 
-  getComponentWidth(layer: CocktailLayer, component: TdmComponent) {
+  getComponentWidth(layer: CocktailLayer, component: CocktailComponent) {
     var width = 100 / layer.components.length;
     return width;
   }
@@ -161,7 +161,7 @@ export class BeakerComponent implements OnInit {
     });
   }
 
-  insertComponent(component: TdmComponent, layerIndex: number, componentIndex: number) {
+  insertComponent(component: CocktailComponent, layerIndex: number, componentIndex: number) {
     if (this.layerPlaceholdersVisible) {
       if (layerIndex % 2 == 0) {
         var newLayer = new CocktailLayer();
@@ -201,7 +201,7 @@ export class BeakerComponent implements OnInit {
     this.updateLayersToDisplay();
   }
 
-  onClick(component: TdmComponent) {
+  onClick(component: CocktailComponent) {
   }
 
   onDragEnd() {
