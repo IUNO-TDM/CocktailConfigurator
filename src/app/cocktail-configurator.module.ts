@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DndModule } from 'ng2-dnd';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http'; // still needed @see https://github.com/angular/angular/issues/19788
 
 // angular material
 import { MatButtonModule } from '@angular/material';
@@ -22,12 +24,13 @@ import { IngredientsListingComponent } from './ingredients-listing/ingredients-l
     MatDialogModule,
     MatButtonModule,
     DndModule.forRoot(),
+    HttpClientModule,
   ],
   declarations: [
     BeakerComponent,
     ComponentListComponent,
     ComponentListDialogComponent,
-    IngredientsListingComponent    
+    IngredientsListingComponent
   ],
   exports: [
     BeakerComponent,

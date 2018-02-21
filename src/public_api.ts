@@ -6,5 +6,3 @@ export { ComponentListDialogComponent } from './app/component-list-dialog/compon
 export { IngredientsListingComponent } from './app/ingredients-listing/ingredients-listing.component'
 export { DragAndDropService } from './app/services/drag-and-drop.service'
 export { ComponentService } from './app/services/component.service'
-// export { CocktailConfiguratorModule } from './src/app/cocktail-configurator.module'
-// export { Cocktail } from './src/app/model/cocktail'
