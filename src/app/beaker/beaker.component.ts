@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Cocktail, CocktailLayer, CocktailComponent } from '../model/cocktail';
-import { DragAndDropService, Draggable } from '../services/drag-and-drop.service';
 import { ComponentListDialogComponent } from '../component-list-dialog/component-list-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Cocktail, CocktailComponent, CocktailLayer } from 'tdm-common';
+import { Draggable } from '../services/drag-and-drop.service';
+import { DragAndDropService } from '../services/drag-and-drop.service';
 
 @Component({
   selector: 'beaker',

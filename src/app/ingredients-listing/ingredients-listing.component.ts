@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
-import { Cocktail, CocktailLayer, CocktailComponent } from '../model/cocktail';
-import { ComponentService } from '../services/component.service';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
+import { Cocktail, CocktailComponent, ComponentService } from 'tdm-common';
 
 @Component({
   selector: 'ingredients-listing',

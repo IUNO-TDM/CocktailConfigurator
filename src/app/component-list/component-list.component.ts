@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DragAndDropService, Draggable } from '../services/drag-and-drop.service';
-import { ComponentService } from '../services/component.service';
-import { CocktailComponent } from '../model/cocktail';
+import { CocktailComponent, ComponentService } from 'tdm-common';
+import { Draggable } from '../services/drag-and-drop.service';
+import { DragAndDropService } from '../services/drag-and-drop.service';
 
 @Component({
   selector: 'app-component-list',

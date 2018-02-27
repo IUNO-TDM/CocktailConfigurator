@@ -12,14 +12,13 @@ import { DndModule } from 'ng2-dnd';
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 
-
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
 import { DragAndDropService } from './services/drag-and-drop.service';
 import { ComponentListComponent } from './component-list/component-list.component';
-import { ComponentService } from './services/component.service';
 import { ComponentListDialogComponent } from './component-list-dialog/component-list-dialog.component';
 import { IngredientsListingComponent } from './ingredients-listing/ingredients-listing.component';
+import { TdmCommonModule } from 'tdm-common';
 
 @NgModule({
   declarations: [
@@ -38,10 +37,10 @@ import { IngredientsListingComponent } from './ingredients-listing/ingredients-l
     MatDialogModule,
     MatButtonModule,
     DndModule.forRoot(),
+    TdmCommonModule.forRoot()
   ],
   providers: [
-    DragAndDropService,
-    ComponentService,
+    DragAndDropService
   ],
   entryComponents: [
     ComponentListDialogComponent,

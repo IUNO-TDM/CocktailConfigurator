@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ComponentService } from '../services/component.service';
-import { CocktailComponent } from '../model/cocktail';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { CocktailComponent, ComponentService } from 'tdm-common';
 
 @Component({
   selector: 'app-component-list-dialog',

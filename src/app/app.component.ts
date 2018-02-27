@@ -4,11 +4,8 @@ import { ViewChild } from '@angular/core';
 import { Inject } from '@angular/core';
 
 // custom imports
-import { CocktailComponent } from './model/cocktail';
-import { Cocktail } from './model/cocktail';
-import { CocktailLayer } from './model/cocktail';
 import { BeakerComponent } from './beaker/beaker.component';
-import { ComponentService } from './services/component.service';
+import { Cocktail, CocktailComponent, ComponentService, CocktailLayer } from 'tdm-common';
 
 export enum EditMode {
   None = 0,

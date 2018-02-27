@@ -11,11 +11,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
-import { DragAndDropService } from './services/drag-and-drop.service';
 import { ComponentListComponent } from './component-list/component-list.component';
-import { ComponentService } from './services/component.service';
 import { ComponentListDialogComponent } from './component-list-dialog/component-list-dialog.component';
 import { IngredientsListingComponent } from './ingredients-listing/ingredients-listing.component';
+import { TdmCommonModule } from 'tdm-common'
 
 @NgModule({
   imports: [
@@ -23,6 +22,7 @@ import { IngredientsListingComponent } from './ingredients-listing/ingredients-l
     FlexLayoutModule,    
     MatDialogModule,
     MatButtonModule,
+    TdmCommonModule,
     DndModule.forRoot(),
     HttpClientModule,
   ],
@@ -39,8 +39,6 @@ import { IngredientsListingComponent } from './ingredients-listing/ingredients-l
     IngredientsListingComponent,
   ],
   providers: [
-    DragAndDropService,
-    ComponentService,
   ],
   entryComponents: [
     ComponentListDialogComponent,
