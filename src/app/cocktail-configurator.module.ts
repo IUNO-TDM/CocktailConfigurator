@@ -8,6 +8,8 @@ import {HttpModule} from '@angular/http'; // still needed @see https://github.co
 // angular material
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
@@ -23,6 +25,8 @@ import { TdmCommonModule } from 'tdm-common'
     MatDialogModule,
     MatButtonModule,
     TdmCommonModule,
+    MatListModule,
+    MatInputModule,
     DndModule.forRoot(),
     HttpClientModule,
   ],

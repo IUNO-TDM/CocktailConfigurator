@@ -11,6 +11,8 @@ import { DndModule } from 'ng2-dnd';
 // angular material
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
@@ -36,6 +38,8 @@ import { TdmCommonModule } from 'tdm-common';
     FormsModule,
     MatDialogModule,
     MatButtonModule,
+    MatListModule,
+    MatInputModule,
     DndModule.forRoot(),
     TdmCommonModule.forRoot()
   ],
