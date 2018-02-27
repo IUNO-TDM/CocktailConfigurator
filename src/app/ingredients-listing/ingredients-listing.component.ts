@@ -5,7 +5,7 @@ import { DecimalPipe } from '@angular/common';
 import { Cocktail, CocktailComponent, ComponentService } from 'tdm-common';
 
 @Component({
-  selector: 'ingredients-listing',
+  selector: 'cocktail-ingredients-listing',
   templateUrl: './ingredients-listing.component.html',
   styleUrls: ['./ingredients-listing.component.css']
 })

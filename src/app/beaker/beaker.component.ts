@@ -8,7 +8,7 @@ import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
 @Component({
-  selector: 'beaker',
+  selector: 'cocktail-beaker',
   templateUrl: './beaker.component.html',
   styleUrls: ['./beaker.component.css']
 })
@@ -18,6 +18,7 @@ export class BeakerComponent implements OnInit {
   draggingIndex = {};
   layerPlaceholdersVisible = false;
   editMode = false;
+  draggingMode = false;
   maxComponentsPerLayer = 8;
   maxLayers = 8;
   layersToDisplay: CocktailLayer[] = [];
@@ -29,12 +30,12 @@ export class BeakerComponent implements OnInit {
     dragAndDropService.dragStart.subscribe(draggable => {
       if (draggable.origin !== this) {
         this.draggingComponent = draggable.object;
-        this.setEditMode(true);
+        this.setDraggingMode(true);
       }
     });
 
     dragAndDropService.dragEnd.subscribe(() => {
-      this.setEditMode(false);
+      this.setDraggingMode(false);
     });
 
     dragAndDropService.drop.subscribe(event => {
@@ -70,7 +71,7 @@ export class BeakerComponent implements OnInit {
     }
 
     this.layerPlaceholdersVisible = false;
-    if (this.editMode) {
+    if (this.editMode || this.draggingMode) {
       if (this.cocktail.layers.length < this.maxLayers) {
         this.layerPlaceholdersVisible = true;
       }
@@ -87,7 +88,7 @@ export class BeakerComponent implements OnInit {
       layer.components.forEach(component => {
         components.push(component);
       });
-      if (this.editMode && layer.components.length < this.maxComponentsPerLayer) {
+      if (this.layerPlaceholdersVisible && layer.components.length < this.maxComponentsPerLayer) {
         let placeholderComponent = createPlaceholderComponent();
         components.push(placeholderComponent);
       }
@@ -109,6 +110,11 @@ export class BeakerComponent implements OnInit {
 
   setEditMode(editMode: boolean) {
     this.editMode = editMode;
+    this.updateLayersToDisplay();
+  }
+
+  setDraggingMode(draggingMode: boolean) {
+    this.draggingMode = draggingMode;
     this.updateLayersToDisplay();
   }
 

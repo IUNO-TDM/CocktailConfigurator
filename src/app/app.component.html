@@ -1,11 +1,11 @@
 <div fxLayout="row" fxLayoutGap="10px">
     <div>
-        <app-component-list></app-component-list>
+        <cocktail-component-list></cocktail-component-list>
     </div>
     <div style="width: 300px; height: 500px;">
-        <beaker [cocktail]="cocktail"></beaker>
+        <cocktail-beaker [cocktail]="cocktail"></cocktail-beaker>
     </div>
-    <ingredients-listing [cocktail]="cocktail"></ingredients-listing>
+    <cocktail-ingredients-listing [cocktail]="cocktail"></cocktail-ingredients-listing>
     <input type="button" value="Konvertieren" (click)="convert()">
     <input *ngIf="!editMode" type="button" value="Bearbeiten" (click)="toggleEditCocktail()">    
     <input *ngIf="editMode" type="button" value="Fertig" (click)="toggleEditCocktail()">    

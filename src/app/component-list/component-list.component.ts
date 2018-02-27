@@ -4,7 +4,7 @@ import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
 @Component({
-  selector: 'app-component-list',
+  selector: 'cocktail-component-list',
   templateUrl: './component-list.component.html',
   styleUrls: ['./component-list.component.css']
 })

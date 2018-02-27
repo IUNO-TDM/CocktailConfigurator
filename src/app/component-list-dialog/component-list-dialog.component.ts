@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CocktailComponent, ComponentService } from 'tdm-common';
 
 @Component({
-  selector: 'app-component-list-dialog',
+  selector: 'cocktail-component-list-dialog',
   templateUrl: './component-list-dialog.component.html',
   styleUrls: ['./component-list-dialog.component.css']
 })
