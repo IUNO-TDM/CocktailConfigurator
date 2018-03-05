@@ -14,6 +14,7 @@ export class ComponentListComponent implements OnInit {
   @Input() draggingMode = 'true';
   @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>();
   components : CocktailComponent[] = [];
+  recommendedComponents : CocktailComponent[] = [];
   visibleComponents : CocktailComponent[] = [];
   queryString = "";
 
@@ -23,6 +24,7 @@ export class ComponentListComponent implements OnInit {
   ) {
     componentService.components.subscribe(components => {
       this.components = components;
+      this.recommendedComponents = this.components.slice(0, 3)
       this.updateVisibleComponents()
     });
   }
@@ -50,10 +52,20 @@ export class ComponentListComponent implements OnInit {
   }
 
   updateVisibleComponents() {
-    this.visibleComponents = this.components.filter(component => {
-      let visible = component.name.toUpperCase().indexOf(this.queryString.toUpperCase()) != -1
+    var visibles = this.components.filter(component => {
+      var visible = component.name.toUpperCase().indexOf(this.queryString.toUpperCase()) != -1
       return visible
     });
+    visibles = visibles.sort((c1, c2) => {
+      var compareValue = 0
+      if (c1.name.toUpperCase() > c2.name.toUpperCase()) {
+        compareValue = 1
+      } else if (c1.name.toUpperCase() < c2.name.toUpperCase()) {
+        compareValue = -1
+      }
+      return compareValue
+    });
+    this.visibleComponents = visibles
   }
 
 }
