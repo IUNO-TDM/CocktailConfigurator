@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CocktailComponent, ComponentService } from 'tdm-common';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CocktailComponent, ComponentService, Cocktail } from 'tdm-common';
 import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
@@ -9,6 +9,8 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
   styleUrls: ['./component-list.component.css']
 })
 export class ComponentListComponent implements OnInit {
+  @Input() draggingMode = 'true';
+  @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>();
   components : CocktailComponent[] = [];
 
   constructor(
@@ -24,19 +26,22 @@ export class ComponentListComponent implements OnInit {
   }
 
   onDragStart(component: CocktailComponent) {
-    // var layerComponent = new CocktailLayerComponent(component, 25);
-    var draggable = new Draggable();
-    draggable.object = component;
-    draggable.origin = this;
-    this.dragAndDropService.onDragStart(draggable);
+    var draggable = new Draggable()
+    draggable.object = component
+    draggable.origin = this
+    this.dragAndDropService.onDragStart(draggable)
   }
 
   onDragEnd() {
-    this.dragAndDropService.onDragEnd();
+    this.dragAndDropService.onDragEnd()
   }
 
   onDrop() {
-    this.dragAndDropService.onDrop(this);
+    this.dragAndDropService.onDrop(this)
+  }
+
+  onComponentClicked(component: CocktailComponent) {
+    this.onComponentSelected.emit(component)
   }
 
 }

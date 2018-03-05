@@ -28,7 +28,7 @@ export class ComponentListDialogComponent implements OnInit {
   }
 
   onCancel() {
-    this.dialogRef.close('Cancel');
+    this.dialogRef.close(null);
   }
 
 }

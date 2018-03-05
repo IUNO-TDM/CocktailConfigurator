@@ -1,22 +1,21 @@
 <div fxLayout="column">
-<mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width">
     <input type="search" matInput placeholder="Suchen" value="">
   </mat-form-field>
-  <!-- <input type="tel" matInput placeholder="Telephone"> -->
-<div class="component-list" dnd-droppable (onDropSuccess)="onDrop()">
-    <mat-list>
-          <mat-list-item *ngFor="let component of components" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
-        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+  <div class="component-list" dnd-droppable (onDropSuccess)="onDrop()">
+    <mat-list *ngIf="draggingMode=='true'">
+      <mat-list-item *ngFor="let component of components" class="component" (click)="onComponentClicked(component)" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)"
+        (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
         <h4 mat-line>{{component.name}}</h4>
-        <!-- <p mat-line> {{folder.updated | date}} </p> -->
       </mat-list-item>
 
-      </mat-list>
+    </mat-list>
+    <mat-list *ngIf="draggingMode=='false'">
+      <mat-list-item *ngFor="let component of components" class="component" (click)="onComponentClicked(component)" [style.backgroundColor]="component.color">
+        Hallo
+        <h4 mat-line>{{component.name}}</h4>
+      </mat-list-item>
+    </mat-list>
 
-<!-- <div *ngFor="let component of components">
-  <div class="component" fxLayoutAlign="center center" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
-    {{component.name}}
   </div>
-</div> -->
-</div>
 </div>
