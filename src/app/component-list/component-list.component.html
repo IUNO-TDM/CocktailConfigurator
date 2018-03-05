@@ -1,18 +1,22 @@
 <div fxLayout="column">
   <mat-form-field class="example-full-width">
-    <input type="search" matInput placeholder="Suchen" value="">
+    <input type="search" matInput placeholder="Suchen" value="" [(ngModel)]="queryString" (ngModelChange)="updateVisibleComponents()">
   </mat-form-field>
-  <div class="component-list" dnd-droppable (onDropSuccess)="onDrop()">
+  <div *ngIf="visibleComponents.length == 0" class="component-list">
+    <mat-list-item class="component">
+      <h4 mat-line>Keine Einträge gefunden</h4>
+    </mat-list-item>
+  </div>
+  <div *ngIf="visibleComponents.length > 0" class="component-list" dnd-droppable (onDropSuccess)="onDrop()">
     <mat-list *ngIf="draggingMode=='true'">
-      <mat-list-item *ngFor="let component of components" class="component" (click)="onComponentClicked(component)" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)"
-        (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
+      <mat-list-item *ngFor="let component of visibleComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
+        [dragEnabled]="true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
         <h4 mat-line>{{component.name}}</h4>
       </mat-list-item>
 
     </mat-list>
     <mat-list *ngIf="draggingMode=='false'">
-      <mat-list-item *ngFor="let component of components" class="component" (click)="onComponentClicked(component)" [style.backgroundColor]="component.color">
-        Hallo
+      <mat-list-item *ngFor="let component of visibleComponents" class="component" (click)="onComponentClicked(component)" [style.backgroundColor]="component.color">
         <h4 mat-line>{{component.name}}</h4>
       </mat-list-item>
     </mat-list>

@@ -180,6 +180,10 @@ export class BeakerComponent implements OnInit {
         this.cocktail.layers[cocktailLayerIndex].components.push(component);
       }
     } else {
+      if (this.cocktail.layers.length == 0) {
+        var newLayer = new CocktailLayer();
+        this.cocktail.layers.splice(layerIndex / 2, 0, newLayer);
+      }
       this.cocktail.layers[layerIndex].components.push(component);
     }
     this.updateLayersToDisplay();

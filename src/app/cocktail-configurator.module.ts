@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { DndModule } from 'ng2-dnd';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpModule} from '@angular/http'; // still needed @see https://github.com/angular/angular/issues/19788
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http'; // still needed @see https://github.com/angular/angular/issues/19788
 
 // angular material
 import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
@@ -27,6 +28,7 @@ import { TdmCommonModule } from 'tdm-common'
     TdmCommonModule,
     MatListModule,
     MatInputModule,
+    FormsModule,
     DndModule.forRoot(),
     HttpClientModule,
   ],
