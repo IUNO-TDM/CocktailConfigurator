@@ -3,6 +3,12 @@
     height: 300px;
     overflow-y: scroll;
     border: 2px dashed #0000;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
 }
 
 .component-list.dnd-drag-over {

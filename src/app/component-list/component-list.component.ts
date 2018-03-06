@@ -11,12 +11,12 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
   styleUrls: ['./component-list.component.css']
 })
 export class ComponentListComponent implements OnInit {
-  @Input() draggingMode = 'true';
-  @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>();
-  private components : CocktailComponent[] = [];
-  private recommendedComponents : CocktailComponent[] = [];
-  private visibleComponents : CocktailComponent[] = [];
-  private queryString = "";
+  @Input() draggable = true
+  @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>()
+  components : CocktailComponent[] = []
+  recommendedComponents : CocktailComponent[] = []
+  visibleComponents : CocktailComponent[] = []
+  queryString = ""
 
   constructor(
     private dragAndDropService: DragAndDropService,

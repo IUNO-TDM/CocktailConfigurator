@@ -2,7 +2,7 @@
   <h2 mat-dialog-title>Zutat hinzufügen</h2>
   <hr>
   <mat-dialog-content>
-      <cocktail-component-list draggingMode="false" (onComponentSelected)="onComponentSelected($event)"></cocktail-component-list>
+      <cocktail-component-list draggable="false" (onComponentSelected)="onComponentSelected($event)"></cocktail-component-list>
   </mat-dialog-content>
   <mat-dialog-actions fxLayoutAlign="center">
     <button mat-raised-button (click)="onCancel()">Abbrechen</button>

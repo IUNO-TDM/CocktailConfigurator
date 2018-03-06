@@ -10,7 +10,7 @@
         Vorgeschlagen
       </mat-list-item>
       <mat-list-item *ngFor="let component of recommendedComponents" class="component" (click)="onComponentClicked(component)"
-        dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
+        dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
         <h4 mat-line>{{component.name}}</h4>
       </mat-list-item>
     </ng-container>
@@ -27,7 +27,7 @@
 
       <!-- <mat-list *ngIf="draggingMode=='true'"> -->
       <mat-list-item *ngFor="let component of visibleComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
-        [dragEnabled]="true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
+        [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
         <h4 mat-line>{{component.name}}</h4>
       </mat-list-item>
     </ng-container>
