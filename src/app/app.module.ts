@@ -44,7 +44,7 @@ import { TdmCommonModule } from 'tdm-common';
     TdmCommonModule.forRoot()
   ],
   providers: [
-    DragAndDropService
+    DragAndDropService,
   ],
   entryComponents: [
     ComponentListDialogComponent,

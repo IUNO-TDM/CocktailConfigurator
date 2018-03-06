@@ -38,18 +38,23 @@ export class AppComponent implements OnInit {
       new CocktailComponent("6", "Reserved 1", "#ddf"),
       new CocktailComponent("7", "Reserved 2", "#ddf"),
       new CocktailComponent("8", "Reserved 3", "#ddf"),
-  ]
-  )
+    ]
+    )
+    componentService.setRecommendComponentIds(
+      [
+        "1", "4", "7"
+      ]
+    )
     componentService.components.subscribe(components => {
       this.components = components;
       let layer1 = new CocktailLayer();
       layer1.components.push(this.components[0]);
       this.cocktail.layers.push(layer1);
-  
+
       let layer2 = new CocktailLayer();
       layer2.components.push(this.components[2]);
       this.cocktail.layers.push(layer2);
-  
+
       let layer3 = new CocktailLayer();
       layer3.components.push(this.components[0]);
       layer3.components.push(this.components[1]);
@@ -62,7 +67,7 @@ export class AppComponent implements OnInit {
       // layer3.components.push(new CocktailLayerComponent(this.components[6], 10));
       // layer3.components.push(new CocktailLayerComponent(this.components[7], 10));
       this.cocktail.layers.push(layer3);
-      })
+    })
     // this.components = [
     //   new CocktailComponent("1", "Apfelsaft", "#7d7"),
     //   new CocktailComponent("2", "Bananensaft", "#dd7"),
@@ -93,7 +98,7 @@ export class AppComponent implements OnInit {
     } else {
       this.editMode = EditMode.AddComponent;
       this.beaker.setEditMode(true);
-      }
+    }
   }
 
   convert() {
@@ -119,7 +124,7 @@ export class AppComponent implements OnInit {
           programComponents.push({
             "ingredient": component.id,
             "amount": this.cocktail.amount / count
-            });
+          });
         }
         // if (components
         // components.push({
