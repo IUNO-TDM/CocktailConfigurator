@@ -7,12 +7,29 @@
     background-color: #f83;
 }
 
-.placeholder {
+.empty_placeholder {
+    background-color: #ddd;
+    color: black;
+    text-align: center;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.empty_placeholder.dnd-drag-over {
     background-color: #aaa;
+}
+
+.placeholder {
+    background-color: #ddd;
 }
 
 .placeholder.dnd-drag-over {
     background-color: #888;
+}
+
+.beaker {
+    width: 300px;
+    height: 400px;
 }
 
 .glass {

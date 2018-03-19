@@ -1,11 +1,13 @@
 <div fxLayout="row" fxLayoutGap="10px">
-    <div>
-        <cocktail-component-list recommendedComponentIds="recommendedComponentIds"></cocktail-component-list>
-    </div>
-    <div style="width: 300px; height: 500px;">
+    <!-- <div> -->
+        <cocktail-component-list style="width: 320px; height: 400px;" recommendedComponentIds="recommendedComponentIds"></cocktail-component-list>
+    <!-- </div> -->
+    <div style="width: 300px; height: 450px;">
         <cocktail-beaker [cocktail]="cocktail"></cocktail-beaker>
     </div>
-    <cocktail-ingredients-listing [cocktail]="cocktail"></cocktail-ingredients-listing>
+    <!-- <div> -->
+            <cocktail-ingredients-listing style="width: 320px; height: 400px;" [cocktail]="cocktail"></cocktail-ingredients-listing>
+            <!-- </div> -->
     <input type="button" value="Konvertieren" (click)="convert()">
     <input *ngIf="!editMode" type="button" value="Bearbeiten" (click)="toggleEditCocktail()">    
     <input *ngIf="editMode" type="button" value="Fertig" (click)="toggleEditCocktail()">    

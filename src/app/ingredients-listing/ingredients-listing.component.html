@@ -1,6 +1,26 @@
-<table>
-  <tr *ngFor="let componentId of getComponentIds()">
-      <td>{{getComponentName(componentId)}}</td>
-      <td style="text-align: right;">{{getComponentAmount(componentId) | number:'.2-2'}} ml</td>
-    </tr>
-</table>
+<div fxLayout="column" fxFlex="auto" class="ingredients-list">
+    <mat-list>
+        <mat-list-item class="header">
+            <div fxFlex style="margin-left: -15px;">Zutat</div>
+            <div>Menge</div>
+        </mat-list-item>
+        <ng-container *ngIf="ingredientIds.length == 0">
+            <mat-list-item class="empty">
+                <div>Es wurden noch keine Zutaten hinzugefügt.</div>
+            </mat-list-item>
+        </ng-container>
+        <ng-container *ngIf="ingredientIds.length > 0">
+            <mat-list-item *ngFor="let componentId of ingredientIds" class="component">
+                <div [style.backgroundColor]="getComponent(componentId).color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -10px;"></div>
+                <div fxFlex>{{getComponentName(componentId)}}</div>
+                <div>{{getComponentAmount(componentId) | number:'.2-2'}} ml</div>
+            </mat-list-item>
+        </ng-container>
+        <ng-container *ngIf="ingredientIds.length > 0">
+            <mat-list-item class="total">
+                <div fxFlex style="margin-left: -15px; text-align: left;"></div>
+                <div>{{cocktail.amount | number:'.2-2'}} ml</div>
+            </mat-list-item>
+        </ng-container>
+    </mat-list>
+</div>

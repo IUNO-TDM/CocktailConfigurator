@@ -1,41 +1,63 @@
-<div class="glass" style="width: 200px; height: 300px;">
-  <svg style="position: absolute;" width="200px" height="300px" viewBox="0 0 1 1" vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
+<div #glass class="glass" fxFlexFill>
+  <svg [style.height.px]="glass.offsetHeight" [style.width.px]="glass.offsetWidth" style="position: absolute;" viewBox="0 0 1 1" vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
     <path d="M0.03,0.03 L0.06,0.97 L0.94,0.97 L0.97,0.03" stroke="black" stroke-width="0.02"
       fill="none" />
   </svg>
   <svg height="0" fxFlex="0">
+    <!-- <svg width="100px" height="100px"> -->
     <clipPath id="clipping-path-2" clipPathUnits="objectBoundingBox">
       <path d="M0.045,0.12C0.5,0.12,0.5,0.11,0.955,0.11 L0.955,0.12L0.925,0.96L0.075,0.96z">
-        <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
+        <animate attributeName="d" dur="7s" repeatCount="indefinite" values="
+          M0.045,0.13 C0.5,0.13, 0.85,0.13, 0.955,0.10 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          M0.045,0.13 C0.5,0.13,  0.5,0.11, 0.955,0.11 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          M0.045,0.13 C0.5,0.12,  0.5,0.12, 0.955,0.13 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          
+          M0.045,0.12 C 0.5,0.12, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.925,0.96L0.075,0.96z;          
+          M0.045,0.10 C0.15,0.13, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          M0.045,0.12 C 0.5,0.12, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          
+          M0.045,0.13 C0.5,0.12,  0.5,0.12, 0.955,0.13 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          M0.045,0.13 C0.5,0.13,  0.5,0.11, 0.955,0.11 L0.955,0.13 L0.925,0.96L0.075,0.96z;
+          M0.045,0.13 C0.5,0.13, 0.85,0.13, 0.955,0.10 L0.955,0.13 L0.925,0.96L0.075,0.96z;" />
+          <!-- <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
           M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;
           M0.045,0.15C0.5,0.11,0.5,0.11,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
           M0.045,0.11C0.5,0.11,0.5,0.15,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
           M0.045,0.15C0.5,0.11,0.5,0.11,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
-          M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;" />
+          M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;" /> -->
       </path>
     </clipPath>
   </svg>
-  <div class="glass-clip" style="width: 200px; height: 300px;" fxLayout="column">
+  <div class="glass-clip" fxLayout="column" fxFlexFill>
     <div fxFlex="10">
     </div>
     <div fxFlex="90" style="padding-bottom: 13px;">
-      <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="placeholder" fxLayoutAlign="center center" dnd-droppable
+      <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center" dnd-droppable
         fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
-        +
+        <ng-container *ngIf="!editMode">
+          Zutat per<br>Drag & Drop<br>hinzufügen.<br><br>
+        </ng-container>
+        <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" xml:space="preserve" style="display: block; margin: auto;">
+          <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
+      </svg>
       </div>
       <div *ngIf="!isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px">
         <div *ngFor="let layer of layersToDisplay; let layerIndex = index;" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
           <div *ngFor="let component of layer.components; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
             <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(layerIndex, componentIndex)"
               (click)="onPlaceholderClicked(layerIndex, componentIndex)">
-              +
-            </div>
+              <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" xml:space="preserve" style="display: block; margin: auto;">
+                <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
+            </svg>
+                  </div>
             <div *ngIf="!editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
               (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onClick(component)">
             </div>
             <div *ngIf="editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
               (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onRemoveComponent(layerIndex, componentIndex)">
-              -
+              <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15"  xml:space="preserve">
+                <path stroke="none" fill="rgb(80, 80, 80)" d="M 29,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
+            </svg>
             </div>
           </div>
         </div>

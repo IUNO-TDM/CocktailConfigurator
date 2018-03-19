@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div fxLayout="column" fxFlex="auto">
   <mat-form-field style=" margin-bottom: -1.25em">
     <input type="search" matInput placeholder="Suchen" value="" [(ngModel)]="queryString" (ngModelChange)="updateVisibleComponents()">
   </mat-form-field>
@@ -10,8 +10,9 @@
         Vorgeschlagen
       </mat-list-item>
       <mat-list-item *ngFor="let component of recommendedComponents" class="component" (click)="onComponentClicked(component)"
-        dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
-        <h4 mat-line>{{component.name}}</h4>
+        dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
+        <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+        <div fxFlex>{{component.name}}</div>
       </mat-list-item>
     </ng-container>
     <!-- Filtered Components -->
@@ -27,8 +28,9 @@
 
       <!-- <mat-list *ngIf="draggingMode=='true'"> -->
       <mat-list-item *ngFor="let component of visibleComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
-        [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()" [style.backgroundColor]="component.color">
-        <h4 mat-line>{{component.name}}</h4>
+        [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
+        <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+        <div fxFlex>{{component.name}}</div>
       </mat-list-item>
     </ng-container>
   </mat-list>

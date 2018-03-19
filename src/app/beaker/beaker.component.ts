@@ -14,6 +14,8 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
 })
 export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
+  @Input() beakerWidth: number;
+  @Input() beakerHeight: number;
   draggingComponent: CocktailComponent;
   draggingIndex = {};
   layerPlaceholdersVisible = false;
@@ -70,8 +72,10 @@ export class BeakerComponent implements OnInit {
       return placeholderLayer;
     }
 
-    this.layerPlaceholdersVisible = false;
+    var placeholdersVisible = false
+    this.layerPlaceholdersVisible = false;    
     if (this.editMode || this.draggingMode) {
+      placeholdersVisible = true
       if (this.cocktail.layers.length < this.maxLayers) {
         this.layerPlaceholdersVisible = true;
       }
@@ -88,7 +92,7 @@ export class BeakerComponent implements OnInit {
       layer.components.forEach(component => {
         components.push(component);
       });
-      if (this.layerPlaceholdersVisible && layer.components.length < this.maxComponentsPerLayer) {
+      if (placeholdersVisible && layer.components.length < this.maxComponentsPerLayer) {
         let placeholderComponent = createPlaceholderComponent();
         components.push(placeholderComponent);
       }
@@ -154,6 +158,9 @@ export class BeakerComponent implements OnInit {
   //  Functions with position indexes
   // ------------------------------------------
   onPlaceholderClicked(layerIndex: number, componentIndex: number) {
+    if (!this.editMode) {
+      return
+    }
     let cocktailLayerIndex = this.getCocktailLayerIndex(layerIndex);
     let dialogRef = this.dialog.open(ComponentListDialogComponent, {
       width: '250px',
