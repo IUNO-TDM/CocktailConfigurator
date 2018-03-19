@@ -39,7 +39,7 @@
     "core-js": "^2.4.1",
     "ng2-dnd": "^5.0.2",
     "rxjs": "^5.5.6",
-    "tdm-common": "https://github.com/IUNO-TDM/TDM-Common/releases/download/v0.0.3-alpha/tdm-common-0.0.3.tgz",
+    "tdm-common": "https://github.com/IUNO-TDM/TDM-Common/releases/download/v0.0.4-alpha/tdm-common-0.0.4.tgz",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
