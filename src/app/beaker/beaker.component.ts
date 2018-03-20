@@ -14,12 +14,11 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
 })
 export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
-  @Input() beakerWidth: number;
-  @Input() beakerHeight: number;
+  @Input() editMode: boolean = false;
   draggingComponent: CocktailComponent;
   draggingIndex = {};
   layerPlaceholdersVisible = false;
-  editMode = false;
+  // editMode = false;
   draggingMode = false;
   maxComponentsPerLayer = 8;
   maxLayers = 8;
