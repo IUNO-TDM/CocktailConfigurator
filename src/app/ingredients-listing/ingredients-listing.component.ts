@@ -19,7 +19,7 @@ export class IngredientsListingComponent implements OnInit {
   constructor(
     private componentService: ComponentService
   ) {
-    componentService.components.subscribe(components => {
+    componentService.availableComponents.subscribe(components => {
       this.components = components;
       this.updateIngredients();
     });

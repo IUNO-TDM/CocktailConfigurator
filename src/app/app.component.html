@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutGap="10px">
     <!-- <div> -->
-        <cocktail-component-list style="width: 320px; height: 450px;" recommendedComponentIds="recommendedComponentIds"></cocktail-component-list>
+        <cocktail-component-list style="width: 320px; height: 450px;" [showRecommended]="showRecommendedComponents" [showAvailable]="showAvailableComponents" [showInstalled]="showInstalledComponents"></cocktail-component-list>
     <!-- </div> -->
     <div style="width: 300px; height: 450px;">
-        <cocktail-beaker [cocktail]="cocktail" [editMode]="true"></cocktail-beaker>
+        <cocktail-beaker [cocktail]="cocktail" [editMode]="true" (onSelectComponent)="selectComponent($event)"></cocktail-beaker>
     </div>
     <!-- <div> -->
             <cocktail-ingredients-listing style="width: 320px; height: 450px;" [cocktail]="cocktail"></cocktail-ingredients-listing>

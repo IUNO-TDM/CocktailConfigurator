@@ -12,23 +12,35 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
 })
 export class ComponentListComponent implements OnInit {
   @Input() draggable = true
+  @Input() showRecommended = true
+  @Input() showAvailable = true
+  @Input() showInstalled = false
+  // @Input() components : CocktailComponent[] = []
+  // @Input() recommendedComponents : CocktailComponent[] = []
   @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>()
-  components : CocktailComponent[] = []
+  availableComponents : CocktailComponent[] = []
   recommendedComponents : CocktailComponent[] = []
-  visibleComponents : CocktailComponent[] = []
+  installedComponents : CocktailComponent[] = []
+  queryComponents : CocktailComponent[] = []
   queryString = ""
 
   constructor(
     private dragAndDropService: DragAndDropService,
     private componentService: ComponentService
   ) {
-    componentService.components.subscribe(components => {
-      this.components = components
-      this.updateVisibleComponents()
+    componentService.availableComponents.subscribe(components => {
+      let sortedComponents = this.sortedComponents(components)
+      this.availableComponents = sortedComponents
+      this.updateSearchResult()
     });
     componentService.recommendedComponents.subscribe(components => {
       let sortedComponents = this.sortedComponents(components)
       this.recommendedComponents = sortedComponents
+    });
+    componentService.installedComponents.subscribe(components => {
+      let sortedComponents = this.sortedComponents(components)
+      this.installedComponents = sortedComponents
+      this.updateSearchResult()
     });
   }
 
@@ -67,12 +79,12 @@ export class ComponentListComponent implements OnInit {
     this.onComponentSelected.emit(component)
   }
 
-  updateVisibleComponents() {
-    var visibles = this.components.filter(component => {
+  updateSearchResult() {
+    var visibles = this.availableComponents.filter(component => {
       var visible = component.name.toUpperCase().indexOf(this.queryString.toUpperCase()) != -1
       return visible
     });
-    this.visibleComponents = this.sortedComponents(visibles)
+    this.queryComponents = this.sortedComponents(visibles)
   }
 
 }

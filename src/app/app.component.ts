@@ -6,6 +6,8 @@ import { Inject } from '@angular/core';
 // custom imports
 import { BeakerComponent } from './beaker/beaker.component';
 import { Cocktail, CocktailComponent, ComponentService, CocktailLayer } from 'tdm-common';
+import { MatDialog } from '@angular/material';
+import { ComponentListDialogComponent } from '../public_api';
 
 export enum EditMode {
   None = 0,
@@ -25,14 +27,19 @@ export class AppComponent implements OnInit {
   components: CocktailComponent[] = [];
   editMode: EditMode = EditMode.None;
 
+  showRecommendedComponents = true
+  showInstalledComponents = true
+  showAvailableComponents = false
+
   constructor(
     private componentService: ComponentService,
+    public dialog: MatDialog,
   ) {
     this.cocktail = new Cocktail();
     componentService.setComponents([
       new CocktailComponent("1", "Apfelsaft", "#7d7"),
-      new CocktailComponent("2", "Bananensaft", "#dd7"),
-      new CocktailComponent("3", "Kirschsaft", "#d77"),
+      new CocktailComponent("2", "Kirschsaft", "#d77"),
+      new CocktailComponent("3", "Bananensaft", "#dd7"),
       new CocktailComponent("4", "Maracujasaft", "#da7"),
       new CocktailComponent("5", "Ananassaft", "#dc9"),
       new CocktailComponent("6", "Reserved 1", "#ddf"),
@@ -45,7 +52,7 @@ export class AppComponent implements OnInit {
         "1", "2", "3", "4", "5", "6", "7", "8"
       ]
     )
-    componentService.components.subscribe(components => {
+    componentService.availableComponents.subscribe(components => {
       this.components = components;
       let layer1 = new CocktailLayer();
       layer1.components.push(this.components[0]);
@@ -81,6 +88,26 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectComponent(callback: (component: CocktailComponent) => any) {
+    let dialogRef = this.dialog.open(ComponentListDialogComponent, {
+      width: '250px',
+      data: {
+        showRecommended: this.showRecommendedComponents,
+        showInstalled: this.showInstalledComponents,
+        showAvailable: this.showAvailableComponents,
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        callback(result)
+      }
+    });
+
+    // console.log(callback)
+    // callback(this.components[0])
   }
 
   isAddComponentMode() {

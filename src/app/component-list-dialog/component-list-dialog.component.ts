@@ -8,16 +8,23 @@ import { CocktailComponent, ComponentService } from 'tdm-common';
   styleUrls: ['./component-list-dialog.component.css']
 })
 export class ComponentListDialogComponent implements OnInit {
-  components: CocktailComponent[] = [];
+  public showRecommended = true
+  public showInstalled = true
+  public showAvailable = true
 
   constructor(
-    private componentService: ComponentService,
     public dialogRef: MatDialogRef<ComponentListDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string
+    @Inject(MAT_DIALOG_DATA) public data
   ) {
-    componentService.components.subscribe(components => {
-      this.components = components;
-    });
+    if (data.showRecommended != undefined) {
+      this.showRecommended = data.showRecommended;
+    }
+    if (data.showInstalled != undefined) {
+      this.showInstalled = data.showInstalled;
+    }
+    if (data.showAvailable != undefined) {
+      this.showAvailable = data.showAvailable;
+    }
   }
 
   ngOnInit() {

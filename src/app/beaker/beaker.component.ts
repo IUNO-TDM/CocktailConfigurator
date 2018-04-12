@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { ComponentListDialogComponent } from '../component-list-dialog/component-list-dialog.component';
@@ -15,6 +15,11 @@ import { DragAndDropService } from '../services/drag-and-drop.service';
 export class BeakerComponent implements OnInit {
   @Input() cocktail: Cocktail;
   @Input() editMode: boolean = false;
+  // @Input() onSelectComponent: boolean = false;
+  @Output() onSelectComponent: EventEmitter<any> = new EventEmitter();
+  @Input() showRecommended = true
+  @Input() showAvailable = true
+  @Input() showInstalled = false
   draggingComponent: CocktailComponent;
   draggingIndex = {};
   layerPlaceholdersVisible = false;
@@ -26,7 +31,6 @@ export class BeakerComponent implements OnInit {
 
   constructor(
     private dragAndDropService: DragAndDropService,
-    public dialog: MatDialog,
   ) {
     dragAndDropService.dragStart.subscribe(draggable => {
       if (draggable.origin !== this) {
@@ -161,17 +165,14 @@ export class BeakerComponent implements OnInit {
       return
     }
     let cocktailLayerIndex = this.getCocktailLayerIndex(layerIndex);
-    let dialogRef = this.dialog.open(ComponentListDialogComponent, {
-      width: '250px',
-      data: {
+    if (this.onSelectComponent.observers.length == 0) {
+      console.log("no handler subscribed!")
+    }
+    this.onSelectComponent.emit(component => {
+      if (component) {
+        this.insertComponent(component, layerIndex, componentIndex);
       }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.insertComponent(result, layerIndex, componentIndex);
-      }
-    });
+    })
   }
 
   insertComponent(component: CocktailComponent, layerIndex: number, componentIndex: number) {
