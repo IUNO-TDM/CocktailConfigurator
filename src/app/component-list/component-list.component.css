@@ -21,19 +21,10 @@
     /* border: 1px solid #aaa; */
 }
 
-.section-header {
-    font-weight: bolder;
-    font-size: 10pt;
-    margin-left: -10px;
+.mat-subheader {
     height: 30px !important;
-    margin-top: 10px;
-    border-bottom: 1px solid black;
-}
-
-.section-header-first {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    margin-left: -12px !important;
     font-weight: bolder;
-    font-size: 10pt;
-    margin-left: -10px;
-    height: 30px !important;
-    border-bottom: 1px solid black;
 }

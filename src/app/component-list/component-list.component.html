@@ -6,9 +6,7 @@
     <ng-container *ngIf="queryString.length == 0">
     <!-- Recommended Components -->
     <ng-container *ngIf="showRecommended && recommendedComponents.length > 0">
-        <mat-list-item class="section-header-first">
-          Vorgeschlagen
-        </mat-list-item>
+        <h3 mat-subheader>Vorgeschlagene Komponenten</h3>
         <mat-list-item *ngFor="let component of recommendedComponents" class="component" (click)="onComponentClicked(component)"
           dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
           <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
@@ -17,9 +15,7 @@
       </ng-container>
     <!-- Installed Components -->
     <ng-container *ngIf="showInstalled && installedComponents.length > 0">
-        <mat-list-item class="section-header-first">
-          Installiert
-        </mat-list-item>
+        <h3 mat-subheader>Installierte Komponenten</h3>
         <mat-list-item *ngFor="let component of installedComponents" class="component" (click)="onComponentClicked(component)"
           dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
           <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
@@ -28,9 +24,7 @@
       </ng-container>
     <!-- Available Components -->
     <ng-container *ngIf="showAvailable && availableComponents.length > 0">
-        <mat-list-item class="section-header-first">
-          Alle Komponenten
-        </mat-list-item>
+        <h3 mat-subheader>Alle Komponenten</h3>
         <mat-list-item *ngFor="let component of availableComponents" class="component" (click)="onComponentClicked(component)"
           dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
           <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
@@ -41,7 +35,7 @@
     <!-- Suchergebnis -->
     <ng-container *ngIf="queryString.length != 0">
         <ng-container *ngIf="queryComponents.length == 0">
-            <mat-list-item class="section-header">
+            <mat-list-item>
               Keine Einträge gefunden
             </mat-list-item>
           </ng-container>
