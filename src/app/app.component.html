@@ -2,8 +2,8 @@
     <!-- <div> -->
         <cocktail-component-list style="width: 320px; height: 450px;" [showRecommended]="showRecommendedComponents" [showAvailable]="showAvailableComponents" [showInstalled]="showInstalledComponents"></cocktail-component-list>
     <!-- </div> -->
-    <div style="width: 300px; height: 450px;">
-        <cocktail-beaker [cocktail]="cocktail" [editMode]="true" (onSelectComponent)="selectComponent($event)"></cocktail-beaker>
+    <div style="width: 320px; height: 450px;">
+        <cocktail-beaker [cocktail]="cocktail" [editMode]="false" (onSelectComponent)="selectComponent($event)"></cocktail-beaker>
     </div>
     <!-- <div> -->
             <cocktail-ingredients-listing style="width: 320px; height: 450px;" [cocktail]="cocktail"></cocktail-ingredients-listing>
