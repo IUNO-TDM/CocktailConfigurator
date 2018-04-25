@@ -45,8 +45,8 @@
       </svg>
       </div>
       <div *ngIf="!isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px">
-        <div *ngFor="let layer of layersToDisplay; let layerIndex = index;" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
-          <div *ngFor="let component of layer.components; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
+        <div *ngFor="let layer of layersToDisplay; let layerIndex = index; trackBy: trackByLayerId" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
+          <div *ngFor="let component of layer.displayComponents; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
             <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(layerIndex, componentIndex)"
               (click)="onPlaceholderClicked(layerIndex, componentIndex)">
               <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" xml:space="preserve" style="display: block; margin: auto;">

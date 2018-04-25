@@ -7,6 +7,12 @@ import { Cocktail, CocktailComponent, CocktailLayer } from 'tdm-common';
 import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
+class DisplayLayer {
+  displayComponents: CocktailComponent[] = []
+  cocktailLayer: CocktailLayer
+  cocktailLayerIndex = 0
+}
+
 @Component({
   selector: 'cocktail-beaker',
   templateUrl: './beaker.component.html',
@@ -26,13 +32,13 @@ export class BeakerComponent implements OnInit {
   draggingMode = false;
   maxComponentsPerLayer = 8;
   maxLayers = 8;
-  layersToDisplay: CocktailLayer[] = [];
+  layersToDisplay: DisplayLayer[] = [];
 
   constructor(
     private dragAndDropService: DragAndDropService,
   ) {
     dragAndDropService.dragStart.subscribe(draggable => {
-      console.log("Start")
+      // console.log("Start")
       this.draggingComponent = draggable.object;
       setTimeout(() => { // necessary 
         this.setDraggingMode(true);
@@ -43,12 +49,12 @@ export class BeakerComponent implements OnInit {
     });
 
     dragAndDropService.dragEnd.subscribe(() => {
-      console.log("End")
+      // console.log("End")
       this.setDraggingMode(false);
     });
 
     dragAndDropService.drop.subscribe(event => {
-      console.log("drop")
+      // console.log("drop")
       this.setDraggingMode(false);
       // remove if dragged outside
       if (event.target !== this && event.draggable.origin === this) {
@@ -70,6 +76,7 @@ export class BeakerComponent implements OnInit {
   }
 
   private updateLayersToDisplay() {
+    var placeholderLayerId = -1
     // console.log("editMode = "+this.editMode+", draggingMode = "+this.draggingMode);
     function createPlaceholderComponent() {
       let placeholderComponent = new CocktailComponent(null, null, "#aaa");
@@ -77,9 +84,11 @@ export class BeakerComponent implements OnInit {
     }
 
     function createPlaceholderLayer() {
-      let placeholderLayer = new CocktailLayer();
+      let placeholderLayer = new DisplayLayer();
+      placeholderLayer.cocktailLayerIndex = placeholderLayerId
+      placeholderLayerId -= 1
       let placeholderComponent = createPlaceholderComponent();
-      placeholderLayer.components.push(placeholderComponent);
+      placeholderLayer.displayComponents.push(placeholderComponent);
       return placeholderLayer;
     }
 
@@ -92,39 +101,57 @@ export class BeakerComponent implements OnInit {
       }
     }
 
-    var layersToDisplay: CocktailLayer[] = [];
+    var layersToDisplay: DisplayLayer[] = [];
 
+    // if (this.draggingIndex != null) { // dragging a component from beaker
+
+    // } else { // dragging a component from somewhere to beaker
+
+    // }
+    var skipNextPlaceholderLayer = false
     this.cocktail.layers.forEach((layer, index) => {
-      layersToDisplay.push(layer)
-    })
-    this.layersToDisplay = layersToDisplay;
-    return
 
+      // add placeholder layer on top of this layer?
+      if (this.layerPlaceholdersVisible) {
+        if (!skipNextPlaceholderLayer) {
+          if (this.draggingIndex == null || this.draggingIndex['layerIndex'] != index || layer.components.length > 1) {
+            let placeholderLayer = createPlaceholderLayer();
+            layersToDisplay.push(placeholderLayer);
+          } else {
+            skipNextPlaceholderLayer = true
+          }
+        } else {
+          skipNextPlaceholderLayer = false
+        }
+      }
 
-    if (this.layerPlaceholdersVisible) {
-      let placeholderLayer = createPlaceholderLayer();
-      layersToDisplay.push(placeholderLayer);
-    }
-
-    this.cocktail.layers.forEach((layer, index) => {
       var components: CocktailComponent[] = []
       layer.components.forEach(component => {
         components.push(component);
       });
       if (placeholdersVisible && layer.components.length < this.maxComponentsPerLayer) {
-        if (this.draggingIndex == null || this.draggingIndex['layerIndex'] != index) {
+        if (this.draggingIndex == null || this.draggingIndex['layerIndex'] != index) { // do not show placeholder in a layer where we drag from
           let placeholderComponent = createPlaceholderComponent();
           components.push(placeholderComponent);
         }
       }
-      var displayLayer = new CocktailLayer()
-      displayLayer.components = components
+      var displayLayer = new DisplayLayer()
+      displayLayer.displayComponents = components
+      displayLayer.cocktailLayer = layer
+      displayLayer.cocktailLayerIndex = index
       layersToDisplay.push(displayLayer)
-      if (this.layerPlaceholdersVisible) {
-        let placeholderLayer = createPlaceholderLayer();
-        layersToDisplay.push(placeholderLayer);
-      }
+      // if (this.layerPlaceholdersVisible) {
+      //   let placeholderLayer = createPlaceholderLayer();
+      //   layersToDisplay.push(placeholderLayer);
+      // }
     });
+
+    // add placeholder layer on bottom
+    if (this.layerPlaceholdersVisible && !skipNextPlaceholderLayer) {
+      let placeholderLayer = createPlaceholderLayer();
+      layersToDisplay.push(placeholderLayer);
+    }
+
     this.layersToDisplay = layersToDisplay;
   }
 
@@ -150,21 +177,25 @@ export class BeakerComponent implements OnInit {
   getDisplayComponentsCount() {
     var count = 0;
     this.layersToDisplay.forEach(layer => {
-      count += layer.components.length;
+      count += layer.displayComponents.length;
     });
     return count;
   }
 
-  getDisplayLayerHeight(layer: CocktailLayer) {
+  getDisplayLayerHeight(layer: DisplayLayer) {
     var total = this.getDisplayComponentsCount();
-    var layerCount = layer.components.length;
+    var layerCount = layer.displayComponents.length;
     var height = 100 * layerCount / total;
     return height;
   }
 
-  getComponentWidth(layer: CocktailLayer, component: CocktailComponent) {
-    var width = 100 / layer.components.length;
+  getComponentWidth(layer: DisplayLayer, component: CocktailComponent) {
+    var width = 100 / layer.displayComponents.length;
     return width;
+  }
+
+  trackByLayerId(index: number, layer: DisplayLayer): number {
+    return layer.cocktailLayerIndex
   }
 
   // getCocktailLayerIndex(layerIndex: number) {
@@ -176,28 +207,27 @@ export class BeakerComponent implements OnInit {
   // }
 
   getCocktailLayerIndexFromDisplayLayerIndex(displayLayerIndex) {
-    console.log("--------------------")
-    console.log("displayLayerIndex = " + displayLayerIndex)
-    console.log(this.layersToDisplay)
+    // console.log("--------------------")
+    // console.log("displayLayerIndex = " + displayLayerIndex)
+    // console.log(this.layersToDisplay)
     var layerIndex = 0
     var newLayer = false
 
     // check if displayLayerIndex is a placeholder layer
     var displayLayer = this.layersToDisplay[displayLayerIndex]
-    if (displayLayer.components.length == 1 && this.isPlaceholder(displayLayer.components[0])) {
+    if (displayLayer.displayComponents.length == 1 && this.isPlaceholder(displayLayer.displayComponents[0])) {
       newLayer = true
     }
 
     for (var index = 0; index < displayLayerIndex; index += 1) {
       var displayLayer = this.layersToDisplay[index]
-      console.log("Testing index " + index)
-      console.log(displayLayer)
-      if (!(displayLayer.components.length == 1 && this.isPlaceholder(displayLayer.components[0]))) {
-        console.log("not a placeholder ")
+      // console.log("Testing index " + index)
+      // console.log(displayLayer)
+      if (!(displayLayer.displayComponents.length == 1 && this.isPlaceholder(displayLayer.displayComponents[0]))) {
         layerIndex += 1
       }
     }
-    console.log("index = " + layerIndex + ", newLayer = " + newLayer)
+    // console.log("index = " + layerIndex + ", newLayer = " + newLayer)
     return {
       index: layerIndex,
       newLayer: newLayer
@@ -307,6 +337,6 @@ export class BeakerComponent implements OnInit {
   }
 
   onDragEnd() {
-    console.log("End?????")
+    this.dragAndDropService.onDragEnd()
   }
 }

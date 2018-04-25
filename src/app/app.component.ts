@@ -56,11 +56,11 @@ export class AppComponent implements OnInit {
       this.components = components;
       let layer1 = new CocktailLayer();
       layer1.components.push(this.components[0]);
-      // this.cocktail.layers.push(layer1);
+      this.cocktail.layers.push(layer1);
 
       let layer2 = new CocktailLayer();
       layer2.components.push(this.components[2]);
-      // this.cocktail.layers.push(layer2);
+      this.cocktail.layers.push(layer2);
 
       let layer3 = new CocktailLayer();
       layer3.components.push(this.components[0]);
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
       // layer3.components.push(new CocktailLayerComponent(this.components[5], 10));
       // layer3.components.push(new CocktailLayerComponent(this.components[6], 10));
       // layer3.components.push(new CocktailLayerComponent(this.components[7], 10));
-      // this.cocktail.layers.push(layer3);
+      this.cocktail.layers.push(layer3);
     })
     // this.components = [
     //   new CocktailComponent("1", "Apfelsaft", "#7d7"),

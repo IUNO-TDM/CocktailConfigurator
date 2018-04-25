@@ -1,10 +1,9 @@
 .component {
-    background-color: #5a5;
     text-align: center;
 }
 
 .component.dnd-drag-start {
-    background-color: #f83;
+    border: 1px dotted #000;
 }
 
 .empty_placeholder {
