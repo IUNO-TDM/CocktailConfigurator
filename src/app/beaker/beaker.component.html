@@ -1,7 +1,7 @@
 <div #glass class="glass" fxFlexFill>
-  <svg [style.height.px]="glass.offsetHeight" [style.width.px]="glass.offsetWidth" style="position: absolute;" viewBox="0 0 1 1" vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
-    <path d="M0.03,0.03 L0.04,0.97 L0.96,0.97 L0.97,0.03" stroke="black" stroke-width="0.02"
-      fill="none" />
+  <svg [style.height.px]="glass.offsetHeight" [style.width.px]="glass.offsetWidth" style="position: absolute;" viewBox="0 0 1 1"
+    vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
+    <path d="M0.03,0.03 L0.04,0.97 L0.96,0.97 L0.97,0.03" stroke="black" stroke-width="0.02" fill="none" />
   </svg>
   <svg height="0" fxFlex="0">
     <!-- <svg width="100px" height="100px"> -->
@@ -19,7 +19,7 @@
           M0.045,0.13 C0.5,0.12,  0.5,0.12, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;
           M0.045,0.13 C0.5,0.13,  0.5,0.11, 0.955,0.11 L0.955,0.13 L0.955,0.96L0.045,0.96z;
           M0.045,0.13 C0.5,0.13, 0.85,0.13, 0.955,0.10 L0.955,0.13 L0.955,0.96L0.045,0.96z;" />
-          <!-- <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
+        <!-- <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
           M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;
           M0.045,0.15C0.5,0.11,0.5,0.11,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
           M0.045,0.11C0.5,0.11,0.5,0.15,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
@@ -32,35 +32,57 @@
     <div fxFlex="10">
     </div>
     <div fxFlex="90" style="padding-bottom: 13px;">
-      <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center" dnd-droppable
-        fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
+      <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center"
+        dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
         <ng-container *ngIf="!editMode">
-          Zutat per<br>Drag & Drop<br>hinzufügen.<br><br>
+          Zutat per
+          <br>Drag & Drop
+          <br>hinzufügen.
+          <br>
+          <br>
         </ng-container>
         <ng-container *ngIf="editMode">
-          Hier tippen um Zutat<br>hinzuzufügen.<br><br>
+          Hier tippen um Zutat
+          <br>hinzuzufügen.
+          <br>
+          <br>
         </ng-container>
-        <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" xml:space="preserve" style="display: block; margin: auto;">
-          <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
-      </svg>
+        <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40"
+          height="40" xml:space="preserve" style="display: block; margin: auto;">
+          <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20"
+          />
+        </svg>
       </div>
       <div *ngIf="!isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px">
-        <div *ngFor="let layer of layersToDisplay; let layerIndex = index; trackBy: trackByLayerId" fxLayout fxLayoutGap="2px" class="layer" [fxFlex]="getDisplayLayerHeight(layer)">
+        <div *ngFor="let layer of layersToDisplay; let layerIndex = index; trackBy: trackByLayerId;" fxLayout fxLayoutGap="2px" class="layer"
+          [fxFlex]="getDisplayLayerHeight(layer)">
           <div *ngFor="let component of layer.displayComponents; let componentIndex = index;" [fxFlex]="getComponentWidth(layer, component)">
             <div *ngIf="isPlaceholder(component)" class="placeholder" fxFill dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(layerIndex, componentIndex)"
               (click)="onPlaceholderClicked(layerIndex, componentIndex)">
-              <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15" xml:space="preserve" style="display: block; margin: auto;">
-                <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
-            </svg>
-                  </div>
+              <!-- draw "+" icon -->
+              <svg *ngIf="!movingComponent" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="15" height="15" xml:space="preserve" style="display: block; margin: auto;">
+                <path stroke="none" fill="rgb(80, 80, 80)" d="M 20,8.5 C 19.42,8.5 18.88,8.7 18.46,9.03 17.88,9.49 17.5,10.2 17.5,11 17.5,11 17.5,13.97 17.5,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 17.5,22.5 17.5,22.66 C 17.5,26.12 17.5,29 17.5,29 17.5,30.38 18.62,31.5 20,31.5 21.38,31.5 22.5,30.38 22.5,29 22.5,29 22.5,26.03 22.5,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 L 22.5,17.5 C 22.5,13.97 22.5,11 22.5,11 22.5,9.62 21.38,8.5 20,8.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20"
+                />
+              </svg>
+              <!-- draw "move" icon -->
+              <svg *ngIf="movingComponent" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="40" height="40" xml:space="preserve" id="canvas1">
+                <path id="canvas1-bezier2" stroke="none" fill="rgb(80, 80, 80)" d="M 20,15.75 C 19.59,15.75 19.25,16.09 19.25,16.5 19.25,16.5 19.25,18.79 19.25,20.41 19.25,20.95 19.25,21.41 19.25,21.7 18.43,20.88 17.52,19.97 17.52,19.97 17.23,19.68 16.75,19.68 16.46,19.97 16.17,20.26 16.17,20.74 16.46,21.03 L 19.46,24.03 C 19.61,24.18 19.8,24.25 19.99,24.25 20.19,24.25 20.38,24.18 20.53,24.03 L 23.53,21.03 C 23.81,20.75 23.82,20.29 23.5,19.94 23.47,19.91 23.43,19.89 23.4,19.86 23.11,19.68 22.72,19.72 22.47,19.97 22.47,19.97 21.57,20.87 20.75,21.69 20.75,20.53 20.75,16.5 20.75,16.5 20.75,16.09 20.41,15.75 20.04,15.75 L 20,15.75 Z M 28,14.67 L 28,25.33 C 28,26.81 26.81,28 25.33,28 L 14.67,28 C 13.19,28 12,26.81 12,25.33 L 12,14.67 C 12,13.19 13.19,12 14.67,12 L 25.33,12 C 26.81,12 28,13.19 28,14.67 Z M 28,14.67"
+                />
+              </svg>
+            </div>
             <div *ngIf="!editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
               (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onClick(component)">
             </div>
             <div *ngIf="editMode && !isPlaceholder(component)" class="component" dnd-draggable [dragEnabled]="true" (onDragStart)="onDragStart(layerIndex, componentIndex)"
               (onDragEnd)="onDragEnd()" fxFill fxLayoutAlign="center center" [style.backgroundColor]="component.color" (click)="onRemoveComponent(layerIndex, componentIndex)">
-              <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15"  xml:space="preserve">
-                <path stroke="none" fill="rgb(80, 80, 80)" d="M 29,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20" />
-            </svg>
+              <!-- draw "-" icon -->
+              <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15"
+                height="15" xml:space="preserve">
+                <path stroke="none" fill="rgb(80, 80, 80)" d="M 29,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20"
+                />
+              </svg>
             </div>
           </div>
         </div>

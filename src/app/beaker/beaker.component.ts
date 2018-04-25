@@ -30,6 +30,7 @@ export class BeakerComponent implements OnInit {
   draggingIndex = {};
   layerPlaceholdersVisible = false;
   draggingMode = false;
+  movingComponent = false;
   maxComponentsPerLayer = 8;
   maxLayers = 8;
   layersToDisplay: DisplayLayer[] = [];
@@ -44,7 +45,8 @@ export class BeakerComponent implements OnInit {
         this.setDraggingMode(true);
       })
       if (draggable.origin !== this) {
-        this.draggingIndex = null;
+        this.draggingIndex = null
+        this.movingComponent = false
       }
     });
 
@@ -289,10 +291,12 @@ export class BeakerComponent implements OnInit {
     })
   }
 
-  onDragStart(layerIndex: number, componentIndex: number) {
-    let cocktailLayerIndex = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex).index;
+  onDragStart(displayLayerIndex: number, componentIndex: number) {
+    // let cocktailLayerIndex = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex).index;
+    let cocktailLayerIndex = this.layersToDisplay[displayLayerIndex].cocktailLayerIndex
     var component = this.cocktail.layers[cocktailLayerIndex].components[componentIndex];
     this.draggingIndex = { layerIndex: cocktailLayerIndex, componentIndex: componentIndex };
+    this.movingComponent = true
     var draggable = new Draggable();
     draggable.object = component;
     draggable.origin = this;
@@ -300,7 +304,7 @@ export class BeakerComponent implements OnInit {
   }
 
 
-  onDropComponent(layerIndex: number, componentIndex: number) {
+  onDropComponent(displayLayerIndex: number, componentIndex: number) {
     if (this.draggingIndex != null) { // component should be moved => remove first, then add
       let dragLayerIndex = this.draggingIndex['layerIndex']
       let dragComponentIndex = this.draggingIndex['componentIndex']
@@ -308,7 +312,7 @@ export class BeakerComponent implements OnInit {
       this.cocktail.removeComponent(dragLayerIndex, dragComponentIndex)
       let layer = this.cocktail.layers[dragLayerIndex]
       // layer.components.splice(dragComponentIndex, 1)
-      this.insertComponent(this.draggingComponent, layerIndex, componentIndex)
+      this.insertComponent(this.draggingComponent, displayLayerIndex, componentIndex)
 
       // remove empty layers
       if (layer.components.length == 0) {
@@ -317,8 +321,8 @@ export class BeakerComponent implements OnInit {
         });
         this.updateLayersToDisplay()
       }
-    } else { // component from 'outside', just insert
-      this.insertComponent(this.draggingComponent, layerIndex, componentIndex)
+    } else { // component from 'outside', just insertfg
+      this.insertComponent(this.draggingComponent, displayLayerIndex, componentIndex)
     }
     this.draggingIndex = null
     this.dragAndDropService.onDrop(this)
