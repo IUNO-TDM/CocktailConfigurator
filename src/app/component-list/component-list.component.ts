@@ -23,6 +23,7 @@ export class ComponentListComponent implements OnInit {
   installedComponents : CocktailComponent[] = []
   queryComponents : CocktailComponent[] = []
   queryString = ""
+  isDropTarget: boolean = false;
 
   constructor(
     private dragAndDropService: DragAndDropService,
@@ -41,6 +42,21 @@ export class ComponentListComponent implements OnInit {
       let sortedComponents = this.sortedComponents(components)
       this.installedComponents = sortedComponents
       this.updateSearchResult()
+    });
+
+    // Drag and Drop
+    dragAndDropService.dragStart.subscribe(draggable => {
+      if (draggable.origin !== this) {
+        this.isDropTarget = true
+      }
+    });
+
+    dragAndDropService.dragEnd.subscribe(() => {
+      this.isDropTarget = false
+    });
+
+    dragAndDropService.drop.subscribe(event => {
+      this.isDropTarget = false
     });
   }
 

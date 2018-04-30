@@ -2,10 +2,25 @@
   <mat-form-field style=" margin-bottom: -1.25em">
     <input type="search" matInput placeholder="Suchen" value="" [(ngModel)]="queryString" (ngModelChange)="updateSearchResult()">
   </mat-form-field>
-  <mat-list dnd-droppable (onDropSuccess)="onDrop()" class="component-list">
+  <div *ngIf="isDropTarget" fxFlexFill class="basket_placeholder" dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDrop()">
+    <div>
+      Zutat hier
+      <br>ablegen um diese
+      <br>zu entfernen.
+      <br>
+      <br>
+      <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40"
+        height="40" xml:space="preserve">
+        <path stroke="none" fill="rgb(80, 80, 80)" d="M 29,17.5 L 11,17.5 C 9.62,17.5 8.5,18.62 8.5,20 8.5,21.38 9.62,22.5 11,22.5 L 29,22.5 C 30.38,22.5 31.5,21.38 31.5,20 31.5,18.62 30.38,17.5 29,17.5 Z M 40,20 C 40,31.05 31.05,40 20,40 8.95,40 0,31.05 0,20 0,13.49 3.11,7.71 7.92,4.06 11.27,1.51 15.46,-0 20,-0 31.05,0 40,8.95 40,20 Z M 40,20"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <mat-list *ngIf="!isDropTarget" dnd-droppable (onDropSuccess)="onDrop()" class="component-list">
     <ng-container *ngIf="queryString.length == 0">
-    <!-- Recommended Components -->
-    <ng-container *ngIf="showRecommended && recommendedComponents.length > 0">
+      <!-- Recommended Components -->
+      <ng-container *ngIf="showRecommended && recommendedComponents.length > 0">
         <h3 mat-subheader>Vorgeschlagene Komponenten</h3>
         <mat-list-item *ngFor="let component of recommendedComponents" class="component" (click)="onComponentClicked(component)"
           dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
@@ -13,20 +28,20 @@
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>
-    <!-- Installed Components -->
-    <ng-container *ngIf="showInstalled && installedComponents.length > 0">
+      <!-- Installed Components -->
+      <ng-container *ngIf="showInstalled && installedComponents.length > 0">
         <h3 mat-subheader>Installierte Komponenten</h3>
-        <mat-list-item *ngFor="let component of installedComponents" class="component" (click)="onComponentClicked(component)"
-          dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
+        <mat-list-item *ngFor="let component of installedComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
+          [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
           <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>
-    <!-- Available Components -->
-    <ng-container *ngIf="showAvailable && availableComponents.length > 0">
+      <!-- Available Components -->
+      <ng-container *ngIf="showAvailable && availableComponents.length > 0">
         <h3 mat-subheader>Alle Komponenten</h3>
-        <mat-list-item *ngFor="let component of availableComponents" class="component" (click)="onComponentClicked(component)"
-          dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
+        <mat-list-item *ngFor="let component of availableComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
+          [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
           <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
@@ -34,20 +49,20 @@
     </ng-container>
     <!-- Suchergebnis -->
     <ng-container *ngIf="queryString.length != 0">
-        <ng-container *ngIf="queryComponents.length == 0">
-            <mat-list-item>
-              Keine Einträge gefunden
-            </mat-list-item>
-          </ng-container>
-          <ng-container *ngIf="queryComponents.length > 0">
-            <!-- <mat-list *ngIf="draggingMode=='true'"> -->
-            <mat-list-item *ngFor="let component of queryComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
-              [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
-              <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
-              <div fxFlex>{{component.name}}</div>
-            </mat-list-item>
-          </ng-container>
-          </ng-container>
+      <ng-container *ngIf="queryComponents.length == 0">
+        <mat-list-item>
+          Keine Einträge gefunden
+        </mat-list-item>
+      </ng-container>
+      <ng-container *ngIf="queryComponents.length > 0">
+        <!-- <mat-list *ngIf="draggingMode=='true'"> -->
+        <mat-list-item *ngFor="let component of queryComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
+          [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
+          <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+          <div fxFlex>{{component.name}}</div>
+        </mat-list-item>
+      </ng-container>
+    </ng-container>
     <!-- Filtered Components -->
   </mat-list>
 </div>

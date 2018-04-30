@@ -28,3 +28,16 @@
     margin-left: -12px !important;
     font-weight: bolder;
 }
+
+.basket_placeholder {
+    background-color: #ddd;
+    color: black;
+    text-align: center;
+    font-size: 120%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.basket_placeholder.dnd-drag-over {
+    background-color: #aaa;
+}
+
