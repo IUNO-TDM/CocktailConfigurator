@@ -26,14 +26,14 @@ export class BeakerComponent implements OnInit {
   @Input() showRecommended = true
   @Input() showAvailable = true
   @Input() showInstalled = false
-  draggingComponent: CocktailComponent;
-  draggingIndex = {};
-  layerPlaceholdersVisible = false;
-  draggingMode = false;
-  movingComponent = false;
-  maxComponentsPerLayer = 8;
-  maxLayers = 8;
-  layersToDisplay: DisplayLayer[] = [];
+  private draggingComponent: CocktailComponent;
+  private draggingIndex = {};
+  private layerPlaceholdersVisible = false;
+  private draggingMode = false;
+  private movingComponent = false;
+  private maxComponentsPerLayer = 8;
+  private maxLayers = 8;
+  private layersToDisplay: DisplayLayer[] = [];
 
   constructor(
     private dragAndDropService: DragAndDropService,
@@ -72,7 +72,7 @@ export class BeakerComponent implements OnInit {
     });
   }
 
-  isPlaceholder(component: CocktailComponent): boolean {
+  private isPlaceholder(component: CocktailComponent): boolean {
     var placeholder = (component.id == null);
     return placeholder;
   }
@@ -176,7 +176,7 @@ export class BeakerComponent implements OnInit {
     this.updateLayersToDisplay();
   }
 
-  getDisplayComponentsCount() {
+  private getDisplayComponentsCount() {
     var count = 0;
     this.layersToDisplay.forEach(layer => {
       count += layer.displayComponents.length;
@@ -184,19 +184,19 @@ export class BeakerComponent implements OnInit {
     return count;
   }
 
-  getDisplayLayerHeight(layer: DisplayLayer) {
+  private getDisplayLayerHeight(layer: DisplayLayer) {
     var total = this.getDisplayComponentsCount();
     var layerCount = layer.displayComponents.length;
     var height = 100 * layerCount / total;
     return height;
   }
 
-  getComponentWidth(layer: DisplayLayer, component: CocktailComponent) {
+  private getComponentWidth(layer: DisplayLayer, component: CocktailComponent) {
     var width = 100 / layer.displayComponents.length;
     return width;
   }
 
-  trackByLayerId(index: number, layer: DisplayLayer): number {
+  private trackByLayerId(index: number, layer: DisplayLayer): number {
     return layer.cocktailLayerIndex
   }
 
@@ -208,7 +208,7 @@ export class BeakerComponent implements OnInit {
   //   return index;
   // }
 
-  getCocktailLayerIndexFromDisplayLayerIndex(displayLayerIndex) {
+  private getCocktailLayerIndexFromDisplayLayerIndex(displayLayerIndex) {
     // console.log("--------------------")
     // console.log("displayLayerIndex = " + displayLayerIndex)
     // console.log(this.layersToDisplay)
@@ -239,7 +239,7 @@ export class BeakerComponent implements OnInit {
   // ------------------------------------------
   //  Functions with position indexes
   // ------------------------------------------
-  onPlaceholderClicked(layerIndex: number, componentIndex: number) {
+  private onPlaceholderClicked(layerIndex: number, componentIndex: number) {
     if (!this.editMode) {
       return
     }
@@ -254,7 +254,7 @@ export class BeakerComponent implements OnInit {
     })
   }
 
-  insertComponent(component: CocktailComponent, layerIndex: number, componentIndex: number) {
+  private insertComponent(component: CocktailComponent, layerIndex: number, componentIndex: number) {
     var i = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex)
     if (i.newLayer) {
       var layer = new CocktailLayer()
@@ -283,7 +283,7 @@ export class BeakerComponent implements OnInit {
     this.updateLayersToDisplay();
   }
 
-  reorderComponents() {
+  private reorderComponents() {
     this.cocktail.layers.forEach(layer => {
       layer.components.sort(function (c1, c2) {
         return c1.name.localeCompare(c2.name)
@@ -291,7 +291,7 @@ export class BeakerComponent implements OnInit {
     })
   }
 
-  onDragStart(displayLayerIndex: number, componentIndex: number) {
+  private onDragStart(displayLayerIndex: number, componentIndex: number) {
     // let cocktailLayerIndex = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex).index;
     let cocktailLayerIndex = this.layersToDisplay[displayLayerIndex].cocktailLayerIndex
     var component = this.cocktail.layers[cocktailLayerIndex].components[componentIndex];
@@ -304,7 +304,7 @@ export class BeakerComponent implements OnInit {
   }
 
 
-  onDropComponent(displayLayerIndex: number, componentIndex: number) {
+  private onDropComponent(displayLayerIndex: number, componentIndex: number) {
     if (this.draggingIndex != null) { // component should be moved => remove first, then add
       let dragLayerIndex = this.draggingIndex['layerIndex']
       let dragComponentIndex = this.draggingIndex['componentIndex']
@@ -328,7 +328,7 @@ export class BeakerComponent implements OnInit {
     this.dragAndDropService.onDrop(this)
   }
 
-  onRemoveComponent(layerIndex: number, componentIndex: number) {
+  private onRemoveComponent(layerIndex: number, componentIndex: number) {
     let cocktailLayerIndex = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex).index;
     this.cocktail.layers[cocktailLayerIndex].components.splice(componentIndex, 1);
     if (this.cocktail.layers[cocktailLayerIndex].components.length == 0) {
@@ -340,7 +340,7 @@ export class BeakerComponent implements OnInit {
   onClick(component: CocktailComponent) {
   }
 
-  onDragEnd() {
+  private onDragEnd() {
     this.dragAndDropService.onDragEnd()
   }
 }
