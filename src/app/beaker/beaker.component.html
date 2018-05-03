@@ -1,37 +1,31 @@
 <div #glass class="glass" fxFlexFill>
   <svg [style.height.px]="glass.offsetHeight" [style.width.px]="glass.offsetWidth" style="position: absolute;" viewBox="0 0 1 1"
     vectorEffect="non-scaling-stroke" preserveAspectRatio="none">
-    <path d="M0.03,0.03 L0.04,0.97 L0.96,0.97 L0.97,0.03" stroke="black" stroke-width="0.02" fill="none" />
+    <path d="M0.02,0.00 L0.03,0.99 L0.97,0.99 L0.98,0.00" stroke="black" stroke-width="0.02" fill="none" />
   </svg>
   <svg height="0" fxFlex="0">
     <!-- <svg width="100px" height="100px"> -->
     <clipPath id="clipping-path-2" clipPathUnits="objectBoundingBox">
-      <path d="M0.045,0.12C0.5,0.12,0.5,0.11,0.955,0.11 L0.955,0.12L0.955,0.96L0.045,0.96z">
+      <path d="M0.03,0.06 C0.5,0.06, 0.85,0.06, 0.97,0.03 L0.97,0.06 L0.96,0.94L0.04,0.94z">
         <animate attributeName="d" dur="7s" repeatCount="indefinite" values="
-          M0.045,0.13 C0.5,0.13, 0.85,0.13, 0.955,0.10 L0.955,0.13 L0.955,0.96L0.045,0.96z;
-          M0.045,0.13 C0.5,0.13,  0.5,0.11, 0.955,0.11 L0.955,0.13 L0.955,0.96L0.045,0.96z;
-          M0.045,0.13 C0.5,0.12,  0.5,0.12, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;
+          M0.03,0.06 C0.5,0.06, 0.85,0.06, 0.97,0.03 L0.97,0.06 L0.96,0.96L0.04,0.96z;
+          M0.03,0.06 C0.5,0.06,  0.5,0.04, 0.97,0.04 L0.97,0.06 L0.96,0.96L0.04,0.96z;
+          M0.03,0.06 C0.5,0.05,  0.5,0.05, 0.97,0.06 L0.97,0.06 L0.96,0.96L0.04,0.96z;
           
-          M0.045,0.12 C 0.5,0.12, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;          
-          M0.045,0.10 C0.15,0.13, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;
-          M0.045,0.12 C 0.5,0.12, 0.5,0.13, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;
+          M0.03,0.05 C 0.5,0.05, 0.5,0.06, 0.97,0.06 L0.97,0.06 L0.96,0.96L0.04,0.96z;          
+          M0.03,0.03 C0.15,0.06, 0.5,0.06, 0.97,0.06 L0.97,0.06 L0.96,0.96L0.04,0.96z;
+          M0.03,0.05 C 0.5,0.05, 0.5,0.06, 0.97,0.06 L0.97,0.06 L0.96,0.96L0.04,0.96z;
           
-          M0.045,0.13 C0.5,0.12,  0.5,0.12, 0.955,0.13 L0.955,0.13 L0.955,0.96L0.045,0.96z;
-          M0.045,0.13 C0.5,0.13,  0.5,0.11, 0.955,0.11 L0.955,0.13 L0.955,0.96L0.045,0.96z;
-          M0.045,0.13 C0.5,0.13, 0.85,0.13, 0.955,0.10 L0.955,0.13 L0.955,0.96L0.045,0.96z;" />
-        <!-- <animate attributeName="d" dur="5s" repeatCount="indefinite" values="
-          M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;
-          M0.045,0.15C0.5,0.11,0.5,0.11,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
-          M0.045,0.11C0.5,0.11,0.5,0.15,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
-          M0.045,0.15C0.5,0.11,0.5,0.11,0.955,0.15 L0.955,0.15L0.925,0.96L0.075,0.96z;
-          M0.045,0.15C0.5,0.15,0.5,0.11,0.955,0.11 L0.955,0.15L0.925,0.96L0.075,0.96z;" /> -->
+          M0.03,0.06 C0.5,0.05,  0.5,0.05, 0.97,0.06 L0.97,0.06 L0.96,0.96L0.04,0.96z;
+          M0.03,0.06 C0.5,0.06,  0.5,0.04, 0.97,0.04 L0.97,0.06 L0.96,0.96L0.04,0.96z;
+          M0.03,0.06 C0.5,0.06, 0.85,0.06, 0.97,0.03 L0.97,0.06 L0.96,0.96L0.04,0.96z;" />
       </path>
     </clipPath>
   </svg>
   <div class="glass-clip" fxLayout="column" fxFlexFill style="padding-left: 10px; padding-right: 10px;">
-    <div fxFlex="10">
+    <div fxFlex="3">
     </div>
-    <div fxFlex="90" style="padding-bottom: 13px;">
+    <div fxFlex="97" style="padding-bottom: 27px;">
       <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center"
         dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
         <ng-container *ngIf="!editMode">

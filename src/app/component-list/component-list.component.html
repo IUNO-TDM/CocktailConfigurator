@@ -1,8 +1,8 @@
-<div fxLayout="column" fxFlex="auto">
-  <mat-form-field style=" margin-bottom: -1.25em">
-    <input type="search" matInput placeholder="Suchen" value="" [(ngModel)]="queryString" (ngModelChange)="updateSearchResult()">
+<div fxLayout="column" fxFlexFill>
+  <mat-form-field fxFlex="none" style="margin-bottom: -1.25em;">
+    <input matInput placeholder="Suchen" value="" [(ngModel)]="queryString" (ngModelChange)="updateSearchResult()">
   </mat-form-field>
-  <div *ngIf="isDropTarget" fxFlexFill class="basket_placeholder" dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDrop()">
+  <div *ngIf="isDropTarget" fxFlex class="basket_placeholder" dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDrop()">
     <div>
       Zutat hier
       <br>ablegen um diese
@@ -16,7 +16,6 @@
       </svg>
     </div>
   </div>
-
   <mat-list *ngIf="!isDropTarget" dnd-droppable (onDropSuccess)="onDrop()" class="component-list">
     <ng-container *ngIf="queryString.length == 0">
       <!-- Recommended Components -->
@@ -65,4 +64,5 @@
     </ng-container>
     <!-- Filtered Components -->
   </mat-list>
+
 </div>
