@@ -11,6 +11,9 @@ import { Cocktail, CocktailComponent, ComponentService } from 'tdm-common';
 })
 export class IngredientsListingComponent implements OnInit {
   @Input() cocktail: Cocktail
+  @Input() ingredientTitle = "Zutat"
+  @Input() amountTitle = "Menge"
+  @Input() noIngredients = "Es wurden noch keine Zutaten<br>hinzugefügt."
 
   components: CocktailComponent[] = []
   ingredients = {}

@@ -1,12 +1,12 @@
 <div fxLayout="column" fxFlex="auto" class="ingredients-list">
     <mat-list>
         <mat-list-item class="header">
-            <div fxFlex style="margin-left: -15px;">Zutat</div>
-            <div>Menge</div>
+            <div fxFlex style="margin-left: -15px;" [innerHTML]="ingredientTitle"></div>
+            <div [innerHTML]="amountTitle"></div>
         </mat-list-item>
         <ng-container *ngIf="ingredientIds.length == 0">
-            <mat-list-item class="empty">
-                <div>Es wurden noch keine Zutaten hinzugefügt.</div>
+            <mat-list-item class="empty" fxLayoutAlign="center">
+                <div [innerHTML]="noIngredients"></div>
             </mat-list-item>
         </ng-container>
         <ng-container *ngIf="ingredientIds.length > 0">

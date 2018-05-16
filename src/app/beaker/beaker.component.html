@@ -29,16 +29,11 @@
       <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center"
         dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
         <ng-container *ngIf="!editMode">
-          Zutat per
-          <br>Drag & Drop
-          <br>hinzufügen.
-          <br>
+          <span [innerHTML]="dragComponentText"></span>
           <br>
         </ng-container>
         <ng-container *ngIf="editMode">
-          Hier tippen um Zutat
-          <br>hinzuzufügen.
-          <br>
+            <span [innerHTML]="touchComponentText"></span>
           <br>
         </ng-container>
         <svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40"

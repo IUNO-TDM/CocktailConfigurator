@@ -15,6 +15,12 @@ export class ComponentListComponent implements OnInit {
   @Input() showRecommended = true
   @Input() showAvailable = true
   @Input() showInstalled = false
+  @Input() removeComponentText = "Zutat hier ablegen<br>um diese zu entfernen."
+  @Input() searchComponentTitle = "Suchen"
+  @Input() recommendedComponentsTitle = "Vorgeschlagene Komponenten"
+  @Input() installedComponentsTitle = "Installierte Komponenten"
+  @Input() availableComponentsTitle = "Alle Komponenten"
+  @Input() emptySearchResultText = "Keine Komponenten gefunden."
   // @Input() components : CocktailComponent[] = []
   // @Input() recommendedComponents : CocktailComponent[] = []
   @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>()

@@ -26,6 +26,8 @@ export class BeakerComponent implements OnInit {
   @Input() showRecommended = true
   @Input() showAvailable = true
   @Input() showInstalled = false
+  @Input() dragComponentText = "Zutat per<br>Drag & Drop<br>hinzufügen."
+  @Input() touchComponentText = "Hier tippen um Zutat<br>hinzuzufügen."
   private draggingComponent: CocktailComponent;
   private draggingIndex = {};
   private layerPlaceholdersVisible = false;

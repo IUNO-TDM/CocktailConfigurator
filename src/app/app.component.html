@@ -1,12 +1,37 @@
 <div fxLayout="row" fxLayoutGap="10px">
     <!-- <div> -->
-        <cocktail-component-list style="width: 320px; height: 450px;" [showRecommended]="showRecommendedComponents" [showAvailable]="showAvailableComponents" [showInstalled]="showInstalledComponents"></cocktail-component-list>
+        <cocktail-component-list
+            style="width: 320px; height: 450px;"
+            [showRecommended]="showRecommendedComponents"
+            [showAvailable]="showAvailableComponents"
+            [showInstalled]="showInstalledComponents"
+            removeComponentText="Drop component here<br>to remove it."
+            searchComponentTitle="Search"
+            recommendedComponentsTitle="Recommended Components"
+            installedComponentsTitle="Installed Components"
+            availableComponentsTitle="Available Components"
+            emptySearchResultText="No components found."
+            >
+        </cocktail-component-list>
     <!-- </div> -->
     <div style="width: 320px; height: 450px;">
-        <cocktail-beaker [cocktail]="cocktail" [editMode]="false" (onSelectComponent)="selectComponent($event)"></cocktail-beaker>
+        <cocktail-beaker
+            [cocktail]="cocktail"
+            [editMode]="false"
+            (onSelectComponent)="selectComponent($event)"
+            dragComponentText="Add ingredient by<br>drag & drop."
+            touchComponentText="Tap here to<br>add ingredient."
+            ></cocktail-beaker>
     </div>
     <!-- <div> -->
-            <cocktail-ingredients-listing style="width: 320px; height: 450px;" [cocktail]="cocktail"></cocktail-ingredients-listing>
+            <cocktail-ingredients-listing
+            style="width: 320px; height: 450px;"
+            [cocktail]="cocktail"
+            ingredientTitle="Ingredient"
+            amountTitle="Amount"
+            noIngredients="No ingredients have been<br>added yet."
+            >
+        </cocktail-ingredients-listing>
             <!-- </div> -->
     <input type="button" value="Konvertieren" (click)="convert()">
     <input *ngIf="!editMode" type="button" value="Bearbeiten" (click)="toggleEditCocktail()">    
