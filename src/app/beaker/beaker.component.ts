@@ -3,13 +3,13 @@ import { OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { ComponentListDialogComponent } from '../component-list-dialog/component-list-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Cocktail, CocktailComponent, CocktailLayer } from 'tdm-common';
+import { TdmCocktailProgram, TdmCocktailComponent, TdmCocktailLayer } from 'tdm-common';
 import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
 class DisplayLayer {
-  displayComponents: CocktailComponent[] = []
-  cocktailLayer: CocktailLayer
+  displayComponents: TdmCocktailComponent[] = []
+  cocktailLayer: TdmCocktailLayer
   cocktailLayerIndex = 0
 }
 
@@ -19,7 +19,7 @@ class DisplayLayer {
   styleUrls: ['./beaker.component.css']
 })
 export class BeakerComponent implements OnInit {
-  @Input() cocktail: Cocktail;
+  @Input() cocktail: TdmCocktailProgram;
   @Input() editMode: boolean = false;
   // @Input() onSelectComponent: boolean = false;
   @Output() onSelectComponent: EventEmitter<any> = new EventEmitter();
@@ -28,7 +28,7 @@ export class BeakerComponent implements OnInit {
   @Input() showInstalled = false
   @Input() dragComponentText = "Zutat per<br>Drag & Drop<br>hinzufügen."
   @Input() touchComponentText = "Hier tippen um Zutat<br>hinzuzufügen."
-  private draggingComponent: CocktailComponent;
+  private draggingComponent: TdmCocktailComponent;
   private draggingIndex = {};
   private layerPlaceholdersVisible = false;
   private draggingMode = false;
@@ -74,7 +74,7 @@ export class BeakerComponent implements OnInit {
     });
   }
 
-  private isPlaceholder(component: CocktailComponent): boolean {
+  private isPlaceholder(component: TdmCocktailComponent): boolean {
     var placeholder = (component.id == null);
     return placeholder;
   }
@@ -83,7 +83,7 @@ export class BeakerComponent implements OnInit {
     var placeholderLayerId = -1
     // console.log("editMode = "+this.editMode+", draggingMode = "+this.draggingMode);
     function createPlaceholderComponent() {
-      let placeholderComponent = new CocktailComponent(null, null, "#aaa");
+      let placeholderComponent = new TdmCocktailComponent(null, null, "#aaa");
       return placeholderComponent;
     }
 
@@ -129,7 +129,7 @@ export class BeakerComponent implements OnInit {
         }
       }
 
-      var components: CocktailComponent[] = []
+      var components: TdmCocktailComponent[] = []
       layer.components.forEach(component => {
         components.push(component);
       });
@@ -193,7 +193,7 @@ export class BeakerComponent implements OnInit {
     return height;
   }
 
-  private getComponentWidth(layer: DisplayLayer, component: CocktailComponent) {
+  private getComponentWidth(layer: DisplayLayer, component: TdmCocktailComponent) {
     var width = 100 / layer.displayComponents.length;
     return width;
   }
@@ -256,10 +256,10 @@ export class BeakerComponent implements OnInit {
     })
   }
 
-  private insertComponent(component: CocktailComponent, layerIndex: number, componentIndex: number) {
+  private insertComponent(component: TdmCocktailComponent, layerIndex: number, componentIndex: number) {
     var i = this.getCocktailLayerIndexFromDisplayLayerIndex(layerIndex)
     if (i.newLayer) {
-      var layer = new CocktailLayer()
+      var layer = new TdmCocktailLayer()
       this.cocktail.addLayer(layer, i.index)
     }
     this.cocktail.addComponent(component, i.index)
@@ -339,7 +339,7 @@ export class BeakerComponent implements OnInit {
     this.updateLayersToDisplay();
   }
 
-  onClick(component: CocktailComponent) {
+  onClick(component: TdmCocktailComponent) {
   }
 
   private onDragEnd() {

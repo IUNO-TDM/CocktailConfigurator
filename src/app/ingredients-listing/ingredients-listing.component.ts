@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { Cocktail, CocktailComponent, ComponentService } from 'tdm-common';
+import { TdmCocktailProgram, TdmCocktailComponent, TdmCocktailComponentService } from 'tdm-common';
 
 @Component({
   selector: 'cocktail-ingredients-listing',
@@ -10,17 +10,17 @@ import { Cocktail, CocktailComponent, ComponentService } from 'tdm-common';
   styleUrls: ['./ingredients-listing.component.css']
 })
 export class IngredientsListingComponent implements OnInit {
-  @Input() cocktail: Cocktail
+  @Input() cocktail: TdmCocktailProgram
   @Input() ingredientTitle = "Zutat"
   @Input() amountTitle = "Menge"
   @Input() noIngredients = "Es wurden noch keine Zutaten<br>hinzugefügt."
 
-  components: CocktailComponent[] = []
+  components: TdmCocktailComponent[] = []
   ingredients = {}
   ingredientIds: String[] = []
 
   constructor(
-    private componentService: ComponentService
+    private componentService: TdmCocktailComponentService
   ) {
     componentService.availableComponents.subscribe(components => {
       this.components = components;
@@ -33,8 +33,8 @@ export class IngredientsListingComponent implements OnInit {
   //   return keys;
   // }
 
-  getComponent(componentId): CocktailComponent {
-    var component: CocktailComponent = null
+  getComponent(componentId): TdmCocktailComponent {
+    var component: TdmCocktailComponent = null
     this.components.forEach(c => {
       if (c.id == componentId) {
         component = c

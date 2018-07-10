@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CocktailComponent, ComponentService, Cocktail } from 'tdm-common';
+import { TdmCocktailComponent, TdmCocktailComponentService, TdmCocktailProgram } from 'tdm-common';
 import { Draggable } from '../services/drag-and-drop.service';
 import { DragAndDropService } from '../services/drag-and-drop.service';
 
@@ -23,17 +23,17 @@ export class ComponentListComponent implements OnInit {
   @Input() emptySearchResultText = "Keine Komponenten gefunden."
   // @Input() components : CocktailComponent[] = []
   // @Input() recommendedComponents : CocktailComponent[] = []
-  @Output() onComponentSelected: EventEmitter<CocktailComponent> = new EventEmitter<CocktailComponent>()
-  availableComponents : CocktailComponent[] = []
-  recommendedComponents : CocktailComponent[] = []
-  installedComponents : CocktailComponent[] = []
-  queryComponents : CocktailComponent[] = []
+  @Output() onComponentSelected: EventEmitter<TdmCocktailComponent> = new EventEmitter<TdmCocktailComponent>()
+  availableComponents : TdmCocktailComponent[] = []
+  recommendedComponents : TdmCocktailComponent[] = []
+  installedComponents : TdmCocktailComponent[] = []
+  queryComponents : TdmCocktailComponent[] = []
   queryString = ""
   isDropTarget: boolean = false;
 
   constructor(
     private dragAndDropService: DragAndDropService,
-    private componentService: ComponentService
+    private componentService: TdmCocktailComponentService
   ) {
     componentService.availableComponents.subscribe(components => {
       let sortedComponents = this.sortedComponents(components)
@@ -66,7 +66,7 @@ export class ComponentListComponent implements OnInit {
     });
   }
 
-  private sortedComponents(components: CocktailComponent[]) {
+  private sortedComponents(components: TdmCocktailComponent[]) {
     let sorted = components.sort((c1, c2) => {
       var compareValue = 0
       if (c1.name.toUpperCase() > c2.name.toUpperCase()) {
@@ -82,7 +82,7 @@ export class ComponentListComponent implements OnInit {
   ngOnInit() {
   }
 
-  onDragStart(component: CocktailComponent) {
+  onDragStart(component: TdmCocktailComponent) {
     var draggable = new Draggable()
     draggable.object = component
     draggable.origin = this
@@ -97,7 +97,7 @@ export class ComponentListComponent implements OnInit {
     this.dragAndDropService.onDrop(this)
   }
 
-  onComponentClicked(component: CocktailComponent) {
+  onComponentClicked(component: TdmCocktailComponent) {
     this.onComponentSelected.emit(component)
   }
 
