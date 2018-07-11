@@ -21,7 +21,7 @@
         <h3 mat-subheader [innerHTML]="recommendedComponentsTitle"></h3>
         <mat-list-item *ngFor="let component of recommendedComponents" class="component" (click)="onComponentClicked(component)"
           dnd-draggable [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
-          <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+          <div [style.backgroundColor]="component.displayColor" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>
@@ -30,7 +30,7 @@
         <h3 mat-subheader [innerHTML]="installedComponentsTitle"></h3>
         <mat-list-item *ngFor="let component of installedComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
           [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
-          <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+          <div [style.backgroundColor]="component.displayColor" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>
@@ -39,7 +39,7 @@
         <h3 mat-subheader [innerHTML]="availableComponentsTitle"></h3>
         <mat-list-item *ngFor="let component of availableComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
           [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
-          <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+          <div [style.backgroundColor]="component.displayColor" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>
@@ -55,7 +55,7 @@
         <!-- <mat-list *ngIf="draggingMode=='true'"> -->
         <mat-list-item *ngFor="let component of queryComponents" class="component" (click)="onComponentClicked(component)" dnd-draggable
           [dragEnabled]="draggable == true" (onDragStart)="onDragStart(component)" (onDragEnd)="onDragEnd()">
-          <div [style.backgroundColor]="component.color" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
+          <div [style.backgroundColor]="component.displayColor" style="width: 30px; height: 30px; margin-right: 10px; margin-left: -15px;"></div>
           <div fxFlex>{{component.name}}</div>
         </mat-list-item>
       </ng-container>

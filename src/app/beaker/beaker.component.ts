@@ -35,7 +35,7 @@ export class BeakerComponent implements OnInit {
   private movingComponent = false;
   private maxComponentsPerLayer = 8;
   private maxLayers = 8;
-  private layersToDisplay: DisplayLayer[] = [];
+  layersToDisplay: DisplayLayer[] = [];
 
   constructor(
     private dragAndDropService: DragAndDropService,
@@ -198,7 +198,7 @@ export class BeakerComponent implements OnInit {
     return width;
   }
 
-  private trackByLayerId(index: number, layer: DisplayLayer): number {
+  trackByLayerId(index: number, layer: DisplayLayer): number {
     return layer.cocktailLayerIndex
   }
 
