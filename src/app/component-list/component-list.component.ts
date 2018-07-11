@@ -35,16 +35,16 @@ export class ComponentListComponent implements OnInit {
     private dragAndDropService: DragAndDropService,
     private componentService: TdmCocktailComponentService
   ) {
-    componentService.availableComponents.subscribe(components => {
+    this.componentService.availableComponents.subscribe(components => {
       let sortedComponents = this.sortedComponents(components)
       this.availableComponents = sortedComponents
       this.updateSearchResult()
     });
-    componentService.recommendedComponents.subscribe(components => {
+    this.componentService.recommendedComponents.subscribe(components => {
       let sortedComponents = this.sortedComponents(components)
       this.recommendedComponents = sortedComponents
     });
-    componentService.installedComponents.subscribe(components => {
+    this.componentService.installedComponents.subscribe(components => {
       let sortedComponents = this.sortedComponents(components)
       this.installedComponents = sortedComponents
       this.updateSearchResult()
