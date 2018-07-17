@@ -14,10 +14,11 @@
             >
         </cocktail-component-list>
     <!-- </div> -->
-    <div style="width: 320px; height: 450px;">
+    <div>
         <cocktail-beaker
             [cocktail]="cocktail"
             [editMode]="false"
+            style="width: 300px; height: 450px;"
             (onSelectComponent)="selectComponent($event)"
             dragComponentText="Add ingredient by<br>drag & drop."
             touchComponentText="Tap here to<br>add ingredient."

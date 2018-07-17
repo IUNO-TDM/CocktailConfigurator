@@ -23,7 +23,7 @@
     </clipPath>
   </svg>
   <div class="glass-clip" fxLayout="column" fxFill style="padding-left: 10px; padding-right: 10px;">
-        <div fxFlex></div>
+        <div fxFlex="10"></div>
         <div fxFlex="90" style="padding-bottom: 9px;">
           <div *ngIf="isEmpty()" fxLayout="column" fxFill fxLayoutGap="2px" class="empty_placeholder" fxLayoutAlign="center center"
             dnd-droppable fxLayoutAlign="center center" (onDropSuccess)="onDropComponent(0, 0)" (click)="onPlaceholderClicked(0, 0)">
